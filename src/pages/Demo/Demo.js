@@ -1,48 +1,32 @@
 import React, { useState } from 'react'
+import { Link, useRouteMatch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
 
-import { ViewAllDemo } from './ViewAllDemo'
-import { AddDemo } from './AddDemo'
+import { DemoRoutes } from '../../routes/demoRoutes'
 
 export const Demo = () => {
-  const [demoList, setDemoList] = useState([
-    {
-      id: 1,
-      name: 'Demo 1'
-    },
-    {
-      id: 2,
-      name: 'Demo 2'
-    },
-    {
-      id: 3,
-      name: 'Demo 3'
-    }
-  ])
+  let { path } = useRouteMatch()
+  const demo = useSelector(state => state.demo)
+
+  console.log(path)
   return (
     <Container>
       <h1>Demo</h1>
-      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+      <Tab.Container id="left-tabs-example" defaultActiveKey={`${path}/all`} activeKey={`${path}/all`}>
         <Row>
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link eventKey="first">View all</Nav.Link>
+                <Nav.Link as={Link} to={`${path}/all`}>View all</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Add Demo</Nav.Link>
+                <Nav.Link as={Link} to={`${path}/add`}>Add Demo</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
-            <Tab.Content>
-              <Tab.Pane eventKey="first">
-                <ViewAllDemo demoList={demoList} />
-              </Tab.Pane>
-              <Tab.Pane eventKey="second">
-                <AddDemo />
-              </Tab.Pane>
-            </Tab.Content>
+            <DemoRoutes path={path} />
           </Col>
         </Row>
       </Tab.Container>

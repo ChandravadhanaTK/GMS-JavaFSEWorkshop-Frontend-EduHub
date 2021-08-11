@@ -1,24 +1,26 @@
+import { useHistory } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
 
 export const DemoItem = (props) => {
+  const history = useHistory()
   return (
     <Card>
       <Card.Body>
-        <Card.Text>
-          <div style={{ display: 'flex' }}>
-            <div style={{ flex: 1 }}>
-              <p>{props.demoData.name}</p>
-            </div>
-            <div>
-              <Button variant="warning" style={{ marginRight: 10 }}>
-                Edit
-              </Button>
-              <Button variant="danger">
-                Delete
-              </Button>
-            </div>
+        <div style={{ display: 'flex' }}>
+          <div style={{ flex: 1 }}>
+            <Card.Text>
+              {props.demoData.name}
+            </Card.Text>
           </div>
-        </Card.Text>
+          <div>
+            <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/demo/edit/${props.demoData.id}`)}>
+              Edit
+            </Button>
+            <Button variant="danger">
+              Delete
+            </Button>
+          </div>
+        </div>
       </Card.Body>
     </Card>
   )
