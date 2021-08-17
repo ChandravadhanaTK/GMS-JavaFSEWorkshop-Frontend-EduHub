@@ -2,18 +2,19 @@ import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
+import { Route, Switch } from 'react-router'
 
-import { DemoRoutes } from '../../routes/demoRoutes'
+//import { MentorRoutes } from '../../routes/mentorRoutes'
+import { ViewAllMentor } from './ViewAllMentor'
+import { AddMentor } from './AddMentor'
 
-export const Demo = () => {
+export const Mentor = () => {
   let { path } = useRouteMatch()
-  console.log(useRouteMatch());
-  const demo = useSelector(state => state.demo)
-
+  const mentor = useSelector(state => state.mentor)
   console.log(path)
   return (
     <Container>
-      <h1>Demo</h1>
+      <h1>Mentor</h1>
       <Tab.Container id="left-tabs-example" defaultActiveKey={`${path}/all`} activeKey={`${path}/all`}>
         <Row>
           <Col sm={3}>
@@ -22,12 +23,16 @@ export const Demo = () => {
                 <Nav.Link as={Link} to={`${path}/all`}>View all</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link as={Link} to={`${path}/add`}>Add Demo</Nav.Link>
+                <Nav.Link as={Link} to={`${path}/add`}>Add Mentor</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
-            <DemoRoutes path={path} />
+            {/* <MentorRoutes path={path} /> */}
+            <Switch>
+              <Route path="/mentor/all" exact component={ViewAllMentor} />
+              <Route path="/mentor/add" exact component={AddMentor} />
+            </Switch>
           </Col>
         </Row>
       </Tab.Container>
