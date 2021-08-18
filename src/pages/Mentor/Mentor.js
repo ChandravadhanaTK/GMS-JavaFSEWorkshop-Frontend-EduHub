@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
 import { Route, Switch } from 'react-router'
 
@@ -11,7 +10,6 @@ import { EditMentor } from './EditMentor'
 
 export const Mentor = () => {
   let { path } = useRouteMatch()
-  const mentor = useSelector(state => state.mentor)
   console.log(path)
   return (
     <Container>

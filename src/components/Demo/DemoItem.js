@@ -16,7 +16,7 @@ export const DemoItem = (props) => {
             <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/demo/edit/${props.demoData.id}`)}>
               Edit
             </Button>
-            <Button variant="danger">
+            <Button variant="danger" onClick={() => props.onDelete(props.demoData.id)}>
               Delete
             </Button>
           </div>

@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
 
 //import { addDemo } from '../../features/demo/demoSlice'
 
 export const AddMentor = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
   const [form, setForm] = useState({
     name: ''
@@ -39,7 +37,6 @@ export const AddMentor = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    dispatch(AddMentor(form))
 
     history.push('/add/all')
   }

@@ -7,7 +7,7 @@ export const DemoRoutes = (props) => {
     <Switch>
       <Route path={`${props.path}/all`} component={ViewAllDemo} />
       <Route path={`${props.path}/add`} component={AddDemo} />
-      <Route path={`${props.path}/edit/:name`} component={EditDemo} />
+      <Route path={`${props.path}/edit/:demoId`} component={EditDemo} />
     </Switch>
   )
 }
