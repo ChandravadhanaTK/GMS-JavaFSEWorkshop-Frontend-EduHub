@@ -7,6 +7,7 @@ import { Route, Switch } from 'react-router'
 //import { MentorRoutes } from '../../routes/mentorRoutes'
 import { ViewAllMentor } from './ViewAllMentor'
 import { AddMentor } from './AddMentor'
+import { EditMentor } from './EditMentor'
 
 export const Mentor = () => {
   let { path } = useRouteMatch()
@@ -25,6 +26,9 @@ export const Mentor = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add Mentor</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link as={Link} to={`${path}/edit`}>Edit Mentor</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
@@ -32,6 +36,7 @@ export const Mentor = () => {
             <Switch>
               <Route path="/mentor/all" exact component={ViewAllMentor} />
               <Route path="/mentor/add" exact component={AddMentor} />
+              <Route path="/mentor/edit" exact component={EditMentor} />
             </Switch>
           </Col>
         </Row>
