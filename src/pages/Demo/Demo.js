@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
 
 import { DemoRoutes } from '../../routes/demoRoutes'
@@ -8,7 +7,6 @@ import { DemoRoutes } from '../../routes/demoRoutes'
 export const Demo = () => {
   let { path } = useRouteMatch()
   console.log(useRouteMatch());
-  const demo = useSelector(state => state.demo)
 
   console.log(path)
   return (

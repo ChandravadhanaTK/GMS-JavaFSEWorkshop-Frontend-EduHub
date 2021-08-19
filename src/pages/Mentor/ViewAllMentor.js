@@ -1,10 +1,8 @@
-import { useSelector } from 'react-redux'
 import { Card } from 'react-bootstrap'
 
 import { MentorItem } from '../../components/Mentor/MentorItem'
 
 export const ViewAllMentor = () => {
-  const mentor = useSelector(state => state.mentor)
 
   const mentorList = [
     {name:"Chandra"},

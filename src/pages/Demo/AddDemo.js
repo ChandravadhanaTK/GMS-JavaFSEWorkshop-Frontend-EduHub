@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
-
-import { addDemo } from '../../features/demo/demoSlice'
+import { addDemo } from '../../features/demo/demoAPI'
 
 export const AddDemo = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
   const [form, setForm] = useState({
     name: ''
@@ -17,11 +14,16 @@ export const AddDemo = () => {
     setForm({ name: updatedValue })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    dispatch(addDemo(form))
 
-    history.push('/demo/all')
+    try {
+      await addDemo(form)
+
+      history.push('/demo/all')
+    } catch (error) {
+      console.error(error)
+    }
   }
   return (
     <Card>
