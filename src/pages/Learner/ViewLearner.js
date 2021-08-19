@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Learner.css' ;
 import { Button } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
-import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 export default class ViewLearner extends Component {
 
@@ -85,6 +85,12 @@ export default class ViewLearner extends Component {
       console.log("Delete all records for User from EDuHub")
       
     }
+
+    this.viewRecord=()=>{
+  
+      console.log("Trigger View Popup")
+      
+    }
     
   }
 
@@ -144,7 +150,7 @@ export default class ViewLearner extends Component {
                             <td>{learner.userid}</td>
                             <td>{learner.course}</td>
                             <div>
-                            <Button variant="info" style={{ marginRight: 10 }} onClick={this.editRecord}>
+                            <Button variant="info" style={{ marginRight: 10 }} onClick={this.viewRecord}>
                                   View
                                 </Button>
                                 <Button variant="warning" style={{ marginRight: 10 }} onClick={this.editRecord}>
