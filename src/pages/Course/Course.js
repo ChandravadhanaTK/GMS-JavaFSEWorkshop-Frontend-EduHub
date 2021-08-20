@@ -5,12 +5,11 @@ import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
 import { Route, Switch } from 'react-router'
 
 //import { MentorRoutes } from '../../routes/mentorRoutes'
-import { ViewAllCourse } from './ViewAllCourse'
-import { AddCourse } from './AddCourse'
+import { CourseRoutes } from '../../routes/courseRoutes'
 
 export const Course = () => {
   let { path } = useRouteMatch()
-  const course = useSelector(state => state.course)
+    console.log(useRouteMatch());
   console.log(path)
   return (
     <Container>
@@ -28,11 +27,7 @@ export const Course = () => {
             </Nav>
           </Col>
           <Col sm={9}>
-            {/* <MentorRoutes path={path} /> */}
-            <Switch>
-              <Route path="/course/all" exact component={ViewAllCourse} />
-              <Route path="/course/add" exact component={AddCourse} />
-            </Switch>
+            <CourseRoutes path={path} />
           </Col>
         </Row>
       </Tab.Container>
