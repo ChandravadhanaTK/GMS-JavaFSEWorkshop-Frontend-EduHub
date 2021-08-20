@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
 import { addCourse } from '../../features/course/courseAPI'
+
+//import { addDemo } from '../../features/demo/demoSlice'
 
 export const AddCourse = () => {
   const history = useHistory()

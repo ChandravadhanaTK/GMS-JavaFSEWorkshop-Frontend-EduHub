@@ -14,6 +14,7 @@ export const NavigationBar = () => {
           <Nav.Link as={Link} to="/demo/all">Demo</Nav.Link>
           <Nav.Link as={Link} to="/mentor/all">Mentor</Nav.Link>
           <Nav.Link as={Link} to="/course/all">Course</Nav.Link>
+          <Nav.Link as={Link} to="/learner">Learner</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

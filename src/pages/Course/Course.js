@@ -1,13 +1,15 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
+import { Route, Switch } from 'react-router'
 
+//import { MentorRoutes } from '../../routes/mentorRoutes'
 import { CourseRoutes } from '../../routes/courseRoutes'
 
 export const Course = () => {
   let { path } = useRouteMatch()
-  console.log(useRouteMatch());
-
+    console.log(useRouteMatch());
   console.log(path)
   return (
     <Container>
