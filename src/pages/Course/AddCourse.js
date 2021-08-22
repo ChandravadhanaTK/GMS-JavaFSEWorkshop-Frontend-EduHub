@@ -1,10 +1,7 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
 import { addCourse } from '../../features/course/courseAPI'
-
-//import { addDemo } from '../../features/demo/demoSlice'
 
 export const AddCourse = () => {
   const history = useHistory()
@@ -54,12 +51,8 @@ export const AddCourse = () => {
 
             <Form.Label>Skill Required</Form.Label>
             <Form.Control value={form.skillreqd} type="text" placeholder="Enter Skill Required" onChange={handleInputSkillReqdChange} />
-
-
-            {/* <Form.Text className="text-muted">
-              Demo stuff :)
-            </Form.Text> */}
-          </Form.Group>
+            </Form.Group>
+            
           <Button variant="primary" type="submit">
             Submit
           </Button>

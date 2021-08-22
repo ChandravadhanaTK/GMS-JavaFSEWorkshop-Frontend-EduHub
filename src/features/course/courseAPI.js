@@ -8,7 +8,7 @@ export const getAllCourse = async () => {
     return res.data
   } catch (error) {
     console.error(error)
-    throw new Error('Request failed!')
+    throw new Error('Request for View All Courses failed!')
   }
 }
 
@@ -20,7 +20,7 @@ export const getCourseById = async (courseId) => {
     return res.data
   } catch (error) {
     console.error(error)
-    throw new Error('Request failed!')
+    throw new Error('Request for View Course failed!')
   }
 }
 
@@ -32,7 +32,7 @@ export const updateCourse = async (course) => {
     return res.data
   } catch (error) {
     console.error(error)
-    throw new Error('Request failed!')
+    throw new Error('Request for Update Course failed!')
   }
 }
 
@@ -44,7 +44,7 @@ export const addCourse = async (course) => {
     return res.data
   } catch (error) {
     console.error(error)
-    throw new Error('Request failed!')
+    throw new Error('Request failed to Add Course!')
   }
 }
 
@@ -56,6 +56,19 @@ export const deleteCourse = async (courseId) => {
     return res.data
   } catch (error) {
     console.error(error)
-    throw new Error('Request failed!')
+    throw new Error('Request failed to Delete Course!')
+  }
+}
+
+
+export const deleteAllCourses = async () => {
+  try {
+    const res = await API.delete(`/course`)
+    console.log(res)
+  
+    return res.data
+  } catch (error) {
+    console.error(error)
+    throw new Error('Request failed to Delete All Courses!')
   }
 }

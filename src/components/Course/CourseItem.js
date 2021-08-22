@@ -1,32 +1,25 @@
 import { useHistory } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-import { useState } from 'react';
 
 export const CourseItem = (props) => {
-  
-  const { courseDataItem } = props;
-  const [courseData, setCourseData] = useState(courseDataItem);
-  const history = useHistory();
-
-  console.log("props: " + JSON.stringify(props));
-  console.log("courseDataItem: "+JSON.stringify(courseDataItem));
-  console.log("courseData: " +JSON.stringify(courseData));
-
+  const history = useHistory()
   return (
     <Card>
       <Card.Body>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <Card.Text>
-            {courseData.name}
+              {props.courseData.coursename}
+              {props.courseData.coursedesc}
+              {props.courseData.skillreqd}
+
             </Card.Text>
           </div>
           <div>
-           {/* <Button variant="warning" style={{ marginRight: 10 }} > */}
-            <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/course/edit/${courseData.name}`)}>
+            <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/course/edit/${props.courseData.courseid}`)}>
               Edit
             </Button>
-            <Button variant="danger">
+            <Button variant="danger" onClick={() => props.onDelete(props.courseData.courseid)}>
               Delete
             </Button>
           </div>
