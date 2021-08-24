@@ -2,7 +2,7 @@ import { API } from '../../api'
 
 export const getAllCourse = async () => {
   try {
-    const res = await API.get(`/course`)
+    const res = await API.get(`/Course`)
     console.log(res)
   
     return res.data
@@ -14,7 +14,7 @@ export const getAllCourse = async () => {
 
 export const getCourseById = async (courseId) => {
   try {
-    const res = await API.get(`/course/${courseId}`)
+    const res = await API.get(`/Course/${courseId}`)
     console.log(res)
   
     return res.data
@@ -26,7 +26,7 @@ export const getCourseById = async (courseId) => {
 
 export const updateCourse = async (course) => {
   try {
-    const res = await API.put(`/course/${course.courseid}`, course)
+    const res = await API.put(`/Course/${course.courseid}`, course)
     console.log(res)
   
     return res.data
@@ -37,9 +37,13 @@ export const updateCourse = async (course) => {
 }
 
 export const addCourse = async (course) => {
+  console.log('entered api for add');
   try {
-    const res = await API.put('/course', course)
-    console.log(res)
+    console.log('inside API')
+    console.log(course)
+
+    const res = await API.put('/Course', course)
+    console.log('response' + res)
   
     return res.data
   } catch (error) {
@@ -50,7 +54,7 @@ export const addCourse = async (course) => {
 
 export const deleteCourse = async (courseId) => {
   try {
-    const res = await API.delete(`/course/${courseId}`)
+    const res = await API.delete(`/Course/${courseId}`)
     console.log(res)
   
     return res.data
@@ -63,7 +67,7 @@ export const deleteCourse = async (courseId) => {
 
 export const deleteAllCourses = async () => {
   try {
-    const res = await API.delete(`/course`)
+    const res = await API.delete(`/Course`)
     console.log(res)
   
     return res.data

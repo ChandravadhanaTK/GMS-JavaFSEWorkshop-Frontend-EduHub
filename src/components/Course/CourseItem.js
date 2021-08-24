@@ -9,8 +9,9 @@ export const CourseItem = (props) => {
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
             <Card.Text>
-              {props.courseData.coursename}
-              {props.courseData.coursedesc}
+              {props.courseData.courseid} +
+              {props.courseData.coursename}+
+              {props.courseData.coursedesc}+
               {props.courseData.skillreqd}
 
             </Card.Text>

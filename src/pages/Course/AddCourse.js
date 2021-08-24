@@ -4,58 +4,96 @@ import { Card, Button, Form } from 'react-bootstrap'
 import { addCourse } from '../../features/course/courseAPI'
 
 export const AddCourse = () => {
-  const history = useHistory()
-  const [form, setForm] = useState({
-    coursename: '' ,
-    coursedesc: '' ,
-    skillreqd:''
+  const history = useHistory();
+ 
+ const [courseid, setCourseId] = useState();
+ const [coursename, setCourseName] = useState('');
+ const [coursedesc, setCourseDesc] = useState('');
+ const [skillreqd, setSkillReqd] = useState('');
+ //const [createdon, setCreatedOn] = useState(null);
+ //const [lastupdatedon, setLastUpdatedon] = useState(null);
+ const [createdon, setCreatedOn] = useState('2021-08-24T18:29:03.14700');
+ const [lastupdatedon, setLastUpdatedon] = useState('2021-08-24T18:29:03.14700');
 
- })
+ 
 
+
+  const handleInputCourseIdChange = (event) => {
+    const updatedValue = event.target.value
+    console.log( updatedValue )
+    setCourseId( updatedValue )
+    
+  }
   const handleInputCourseNameChange = (event) => {
     const updatedValue = event.target.value
-    setForm({ coursename: updatedValue })
+    setCourseName( updatedValue )
   }
 
   const handleInputCourseDescChange = (event) => {
     const updatedValue = event.target.value
-    setForm({ coursedesc: updatedValue })
+    setCourseDesc( updatedValue )
   }
 
   const handleInputSkillReqdChange = (event) => {
     const updatedValue = event.target.value
-    setForm({ skillreqd: updatedValue })
+    setSkillReqd( updatedValue )
   }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
+    const course = {  
+                      
+                      courseId          : courseid,
+                      courseName        : coursename,
+                      courseDesc        : coursedesc,
+                      skillReqd         : skillreqd,
+                      createdOn         : createdon,
+                      lastUpdatedOn     : lastupdatedon
+                     
+                    };
+
+    console.log(course);
+    console.log('before try');
 
     try {
-      await addCourse(form)
-
+      console.log('inside try');
+      await addCourse(course)
+      console.log('after await');
       history.push('/course/all')
     } catch (error) {
       console.error(error)
     }
+
+    history.push('/course/all')
   }
+
+
   return (
     <Card>
       <Card.Body>
         <Card.Title>Add Course</Card.Title>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Course Name</Form.Label>
-            <Form.Control value={form.coursename} type="text" placeholder="Enter Course name" onChange={handleInputCourseNameChange} />
-
+          <Form.Group className="mb-3" controlId="formCourseId">
+            <Form.Label>Course Id</Form.Label>
+            <Form.Control value={courseid} type="text" placeholder="Enter Course Id" onChange={handleInputCourseIdChange} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formCourseName">
+             <Form.Label>Course Name</Form.Label>
+            <Form.Control value={coursename} type="text" placeholder="Enter Course name" onChange={handleInputCourseNameChange} />
+         </Form.Group>
+         <Form.Group className="mb-3" controlId="formCourseDescription">
             <Form.Label>Course Description</Form.Label>
-            <Form.Control value={form.coursedesc} type="text" placeholder="Enter Course Description" onChange={handleInputCourseDescChange} />
-
+            <Form.Control value={coursedesc} type="text" placeholder="Enter Course Description" onChange={handleInputCourseDescChange} />
+        </Form.Group> 
+        <Form.Group className="mb-3" controlId="formSkillReqd">
             <Form.Label>Skill Required</Form.Label>
-            <Form.Control value={form.skillreqd} type="text" placeholder="Enter Skill Required" onChange={handleInputSkillReqdChange} />
-            </Form.Group>
-            
-          <Button variant="primary" type="submit">
+            <Form.Control value={skillreqd} type="text" placeholder="Enter Skill Required" onChange={handleInputSkillReqdChange} />
+        </Form.Group>
+                          
+        <Button variant="primary" type="submit">
             Submit
-          </Button>
+        </Button>
+
         </Form>
       </Card.Body>
     </Card>
