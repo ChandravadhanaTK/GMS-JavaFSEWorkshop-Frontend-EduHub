@@ -6,10 +6,10 @@ import './Learner.css' ;
 import { Card, Button, Form, Container, Col, Row } from 'react-bootstrap'
 // import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
 
-export default class AddLearner extends Component {
+export default class EditLearner extends Component {
     render () { 
       return (
-          <Card className="AddLearner">
+          <Card className="EditLearner">
             <Card.Body>
               <Card.Title>Add Learner</Card.Title>
               <Card.Text>

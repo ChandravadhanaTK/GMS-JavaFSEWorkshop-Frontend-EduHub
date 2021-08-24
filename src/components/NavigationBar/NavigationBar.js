@@ -13,7 +13,7 @@ export const NavigationBar = () => {
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link as={Link} to="/demo/all">Demo</Nav.Link>
           <Nav.Link as={Link} to="/mentor/all">Mentor</Nav.Link>
-          <Nav.Link as={Link} to="/learner">Learner</Nav.Link>
+          <Nav.Link as={Link} to="/learner/view">Learner</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
