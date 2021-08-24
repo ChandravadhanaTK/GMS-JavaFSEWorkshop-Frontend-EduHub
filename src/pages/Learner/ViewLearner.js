@@ -107,29 +107,58 @@ export const ViewLearner = () => {
     setShowModal(true)
   }
 
+  const handleModalOpenNew = () => {
+    setToDelete('')
+    setShowModal(true)
+  }
+
   const handleModalClose = () => {
     setShowModal(false)
   }
 
   const handleDelete = async () => {
     try {
-      await deleteLearner(toDelete)
 
-      // clear toDelete
-      setToDelete('')
-
-      // close modal
-      setShowModal(false)
-
-      // refresh learner data
-      // await getAllLearnerData()
-      if (search === 'All')
-        {getAllLearnerData()}
+      console.log(`to delete - ${toDelete}`)
+      if (toDelete !== '')
+       { 
+         
+        console.log(`delete row`)
+        await deleteLearner(toDelete)
+         setToDelete('')
+         setShowModal(false)
+         { search === 'All' && getAllLearnerData()}
+         { search === 'RequestId' && getLearnerDataByRequest(userinput)}
+         { search === 'UserId' && getLearnerDataByUser(userinput)}
+       }
       else
-        if (search === 'RequestId')
-                 {getLearnerDataByRequest(userinput)}
-        else 
-          {getLearnerDataByUser(userinput)}  
+              if (search === 'All')
+                {
+                  console.log(`delete ALL `)
+                  await deleteAll()
+                  setToDelete('')
+                  setShowModal(false)
+                  setSearchClicked(false)
+                  getAllLearnerData()}
+              else
+                if (search === 'RequestId')
+                        {
+                          console.log(`delete request`)
+                          await deleteLearner(userinput)
+                          setToDelete('')
+                          setShowModal(false)
+                          setSearchClicked(false)
+                          getLearnerDataByRequest(userinput)
+                        }
+                else 
+                  {
+                    console.log(`delete user`)
+                    await deleteAllForUser(userinput)
+                    setToDelete('')
+                    setShowModal(false)
+                    setSearchClicked(false)
+                    getLearnerDataByUser(userinput)
+                  }  
      
     } catch (error) {
       
@@ -140,7 +169,7 @@ export const ViewLearner = () => {
     try {
       await deleteAllLearner()
 
-      {getAllLearnerData()}
+      // {getAllLearnerData()}
            
       
      
@@ -153,7 +182,7 @@ export const ViewLearner = () => {
     try {
       await deleteLearnerUser(userinput)
 
-        {getLearnerDataByUser(userinput)}
+        // {getLearnerDataByUser(userinput)}
            
       
      
@@ -218,20 +247,21 @@ export const ViewLearner = () => {
           <Button variant="secondary" onClick={handleModalClose}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
-          </Button>
+          <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
-      {/* { search === 'All' && 
+      
+      
+      { search === 'All' && 
       <div>
-          <Button variant="danger" onClick={deleteAll}>Delete All</Button>
+          <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
       </div> }
       { search === 'UserId' && 
       <div>
-      <Button variant="danger" onClick={deleteAllForUser}>Delete All</Button>
+      <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
       </div>
-      } */}
+      }
+    
     </React.Fragment>
     }
 
