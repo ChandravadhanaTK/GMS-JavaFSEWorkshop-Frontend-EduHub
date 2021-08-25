@@ -91,17 +91,15 @@ export const ViewAllMentor = () => {
           )
         })}
       </Card>
-      { mentors.length > 1 
-        ? <Button variant="danger" size="lg" 
-                style={{  marginTop: 10,
-                          padding: "8px 12px",
-                          fontSize: "17px",
-                          textalign: "center"
-                      }} 
-                onClick={handleDeleteAllModalOpen}>
+      {mentors.length > 1 ?
+        <div className="d-grid gap-2">
+          <Button variant="danger" size="lg"
+            style={{ width: "100%", marginTop: "10px" }}
+            onClick={handleDeleteAllModalOpen}>
             Delete All
           </Button>
-        : null                    
+        </div>
+        : null
       }
 
       <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
