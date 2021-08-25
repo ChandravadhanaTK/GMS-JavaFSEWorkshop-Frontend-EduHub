@@ -2,7 +2,7 @@ import { Card, Modal, Button } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
 import {  getAllMentors, 
           deleteMentor, 
-          deleteAllMentor } from '../../features/mentor/mentorAPI'
+          deleteAllMentor, updateMentor } from '../../features/mentor/mentorAPI'
 import { MentorItem } from '../../components/Mentor/MentorItem'
 
 export const ViewAllMentor = () => {
@@ -16,7 +16,7 @@ export const ViewAllMentor = () => {
       // fectch data from api and update the state
       console.log("Within useEffect()");
       getMentorData()
-  },  []);
+  },  [])
 
   const getMentorData = async () => {
     try {
@@ -28,6 +28,7 @@ export const ViewAllMentor = () => {
       // TODO: notify user
     }
   }
+ 
 
   const handleDeleteModalOpen = (mentorId) => {
     setToDelete(mentorId)
@@ -85,6 +86,7 @@ export const ViewAllMentor = () => {
             <MentorItem key={mentor.availabilityid}
                         mentorData={mentor}
                         onDelete={handleDeleteModalOpen} 
+                        // onEdit={handleEditModalOpen}
             />
           )
         })}
@@ -101,6 +103,7 @@ export const ViewAllMentor = () => {
           </Button>
         : null                    
       }
+
       <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Mentor</Modal.Title>

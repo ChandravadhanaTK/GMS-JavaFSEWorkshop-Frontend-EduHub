@@ -23,6 +23,30 @@ export const addMentor = async (mentor) => {
       throw new Error('addMentor API request failed!');
     }
   }
+  export const getMentorById = async (userid) => {
+    try {
+      const res = await API.get(`/mentor/${userid}`)
+      console.log(res)
+    
+      return res.data
+    } catch (error) {
+      console.error(error)
+      throw new Error('View MentorByID Request failed!')
+    }
+  }
+
+  export const updateMentor = async (mentor) => {
+    try {
+      console.log(mentor)
+      const res = await API.post(`/mentor/${mentor.userid}`, mentor)
+      console.log(res)
+    
+      return res.data
+    } catch (error) {
+      console.error(error)
+      throw new Error('EditMentor API Request failed!')
+    }
+  }
 
 export const deleteMentor = async (userId) => {
     try {

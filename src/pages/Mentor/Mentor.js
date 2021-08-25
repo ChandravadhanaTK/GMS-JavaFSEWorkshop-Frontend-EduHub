@@ -25,9 +25,6 @@ export const Mentor = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add Mentor</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
-                <Nav.Link as={Link} to={`${path}/edit`}>Edit Mentor</Nav.Link>
-              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>

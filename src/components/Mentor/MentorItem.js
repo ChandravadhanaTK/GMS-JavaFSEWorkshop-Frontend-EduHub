@@ -21,7 +21,7 @@ export const MentorItem = (props) => {
             </Card.Text>
           </div>
           <div>
-            <Button variant="warning" style={{ marginRight: 10 }} >
+            <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/mentor/edit/${props.mentorData.userid}`)} >
               Edit
             </Button>
             <Button variant="danger"  
