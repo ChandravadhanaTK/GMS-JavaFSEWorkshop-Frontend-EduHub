@@ -38,7 +38,7 @@ export const addMentor = async (mentor) => {
   export const updateMentor = async (mentor) => {
     try {
       console.log(mentor)
-      const res = await API.post(`/mentor/${mentor.userid}`, mentor)
+      const res = await API.post('/mentor', mentor)
       console.log(res)
     
       return res.data
