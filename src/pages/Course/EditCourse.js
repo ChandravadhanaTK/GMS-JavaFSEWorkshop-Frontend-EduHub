@@ -1,37 +1,64 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
+import { updateCourse } from '../../features/course/courseAPI'
 
 export const EditCourse = () => {
-       const dispatch = useDispatch()
+
+
+ const [coursename, setCourseName] = useState('');
+ const [coursedesc, setCourseDesc] = useState('');
+ const [skillreqd, setSkillReqd] = useState('');
+//  const [createdon, setCreatedOn] = useState('2021-08-24T18:29:03.14700');
+//  const [lastupdatedon, setLastUpdatedon] = useState('2021-08-24T18:29:03.14700');
+
+
     const history = useHistory()
-    const [form, setForm] = useState({
-      name: ''
-    })
-  
+    // const [form, setForm] = useState({
+    //   name: ''
+    // })
     const handleInputCourseNameChange = (event) => {
       const updatedValue = event.target.value
-      setForm({ coursename: updatedValue })
+      setCourseName( updatedValue )
     }
   
     const handleInputCourseDescChange = (event) => {
       const updatedValue = event.target.value
-      setForm({ courseDesc: updatedValue })
+      setCourseDesc( updatedValue )
     }
   
     const handleInputSkillReqdChange = (event) => {
       const updatedValue = event.target.value
-      setForm({ skillReqd: updatedValue })
+      setSkillReqd( updatedValue )
     }
   
-  
-    const handleSubmit = (event) => {
-      event.preventDefault()
-      dispatch(EditCourse(form))
-  
-      history.push('/add/all')
-    }
+      const handleSubmit = async (event) => {
+      
+        const course = {  
+                          
+                         
+                          courseName        : coursename,
+                          courseDesc        : coursedesc,
+                          skillReqd         : skillreqd,
+                                                  
+                        };
+    
+        console.log(course);
+        console.log('before try of edit');
+    
+        try {
+          console.log('inside try of edit');
+          await updateCourse(course)
+          console.log('after await of edit');
+          
+        } catch (error) {
+          console.error(error)
+        }
+    
+       
+      }
+    
+    
   return (
     <Card>
       <Card.Body>
@@ -40,18 +67,15 @@ export const EditCourse = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicName" size="sm">
             <Form.Label>Course Name</Form.Label>
-            <Form.Control value={form.coursename} type="text" placeholder="Enter Course name" size="sm" onChange={handleInputCourseNameChange} />
-            {/* <Form.Text className="text-muted">
-              Course stuff :)
-            </Form.Text> */}
-          </Form.Group>
+            <Form.Control value={coursename} type="text" size="sm" onChange={handleInputCourseNameChange} />
+         </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCourseDesc">
             <Form.Label>Course Description</Form.Label>
-            <Form.Control value={form.coursedesc} type="text" placeholder="Enter Course Desc" size="sm" onChange={handleInputCourseDescChange} />
+            <Form.Control value={coursedesc} type="text" size="sm" onChange={handleInputCourseDescChange} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicSkillReqd">
             <Form.Label>Skill Required</Form.Label>
-            <Form.Control value={form.skillReqd} type="text" placeholder="Enter Skill Required" size="sm" onChange={handleInputSkillReqdChange} />
+            <Form.Control value={skillreqd} type="text" size="sm" onChange={handleInputSkillReqdChange} />
           </Form.Group>
           
           <Button variant="primary" type="submit">
