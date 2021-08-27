@@ -5,18 +5,19 @@ import { updateCourse } from '../../features/course/courseAPI'
 
 export const EditCourse = () => {
 
-
+  const [courseid, setCourseId] = useState();
  const [coursename, setCourseName] = useState('');
  const [coursedesc, setCourseDesc] = useState('');
  const [skillreqd, setSkillReqd] = useState('');
-//  const [createdon, setCreatedOn] = useState('2021-08-24T18:29:03.14700');
-//  const [lastupdatedon, setLastUpdatedon] = useState('2021-08-24T18:29:03.14700');
-
+ const [createdon, setCreatedOn] = useState('2021-08-24T18:29:03.14700');
+  const [lastupdatedon, setLastUpdatedon] = useState('2021-08-24T18:29:03.14700');
+ console.log('entered edit course')
 
     const history = useHistory()
     // const [form, setForm] = useState({
     //   name: ''
     // })
+
     const handleInputCourseNameChange = (event) => {
       const updatedValue = event.target.value
       setCourseName( updatedValue )
@@ -36,10 +37,12 @@ export const EditCourse = () => {
       
         const course = {  
                           
-                         
+                          courseId           : courseid,
                           courseName        : coursename,
                           courseDesc        : coursedesc,
                           skillReqd         : skillreqd,
+                          createdOn         : createdon,
+                          lastUpdatedOn     : lastupdatedon
                                                   
                         };
     
@@ -54,7 +57,8 @@ export const EditCourse = () => {
         } catch (error) {
           console.error(error)
         }
-    
+
+        history.push('/course/all')
        
       }
     

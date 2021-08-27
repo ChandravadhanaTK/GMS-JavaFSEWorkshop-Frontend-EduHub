@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Row, Modal, Button } from 'react-bootstrap'
+import { useRouteMatch } from 'react-router-dom'
 import { getAllCourse, deleteCourse, deleteAllCourses } from '../../features/course/courseAPI'
 import { CourseItem } from '../../components/Course/CourseItem'
+import { CourseRoutes } from '../../routes/courseRoutes'
 
 export const ViewAllCourse = () => {
 
   const [course, setCourse] = useState([])
   const [showModal, setShowModal] = useState(false)
   const [showModalAll, setShowModalAll] = useState(false)
-  
   const [toDelete, setToDelete] = useState('')
+  let { path } = useRouteMatch();
+  console.log(useRouteMatch());
+  console.log(path)
 
   useEffect(() => {
     getCourseData()
    }, [])
+
+
 
   const getCourseData = async () => {
     try {
@@ -30,6 +36,13 @@ export const ViewAllCourse = () => {
      
     }
   }
+
+  
+
+ 
+    
+
+ 
 
   const handleModalOpen = (courseId) => {
     console.log("InsideModalOpen");
@@ -127,8 +140,8 @@ export const ViewAllCourse = () => {
       <Card>
         {course.map(item => {
           return (
-            <CourseItem key={item.courseid} courseData={item} onDelete={handleModalOpen} />
-          )
+              <CourseItem key={item.courseid} courseData={item} onDelete={handleModalOpen} />
+            )
         })}
       </Card>
      

@@ -28,10 +28,13 @@ export const CourseItem = (props) => {
           </div>
           <div>
             <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/course/edit/${props.courseData.courseId}`)}>
+            {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/edit/${props.courseData.courseId}`)}> */}
+            {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => props.onEdit(props.courseData.courseId)}> */}
               Edit
             </Button>
             <Button variant="danger" onClick={() => props.onDelete(props.courseData.courseId)}>
             Delete
+            //props.path}/edit/:courseId`
             </Button>
           </div>
         </div>
