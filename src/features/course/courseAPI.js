@@ -15,6 +15,7 @@ export const getAllCourse = async () => {
 export const getCourseById = async (courseId) => {
   try {
     const res = await API.get(`/Course/${courseId}`)
+    console.log('inside get course by id')
     console.log(res)
   
     return res.data
@@ -26,7 +27,7 @@ export const getCourseById = async (courseId) => {
 
 export const updateCourse = async (course) => {
   try {
-    const res = await API.put(`/Course/${course.courseid}`, course)
+    const res = await API.put(`/Course/${course.courseId}`, course)
     console.log(res)
   
     return res.data
