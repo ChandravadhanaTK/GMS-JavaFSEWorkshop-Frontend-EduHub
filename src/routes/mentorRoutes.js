@@ -8,7 +8,7 @@ export const MentorRoutes = (props) => {
       <Route path={`${props.path}/all`} component={ViewAllMentor} /> 
       <Route path={`${props.path}/add`} component={AddMentor} />
       <Route path={`${props.path}/edit/:userId`} component={EditMentor} />
+      <Route path={`${props.path}/view`} component={ViewMentor} />
     </Switch>
   )
 }
-//<Route path={`${props.path}/view/:mentorId`} component={ViewMentor} /> 
