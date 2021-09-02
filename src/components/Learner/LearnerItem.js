@@ -1,12 +1,13 @@
 import { useHistory } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-import { useState } from 'react';
+import { EditLearner } from '../../pages/Learner/EditLearner';
+
 
 
 export const LearnerItem = (props) => {
   
-  const { learnerDataItem } = props;
-  // const [learnerData, setLearnerData] = useState(learnerDataItem);
+  // const { learnerDataItem } = props;
+  // // const [learnerData, setLearnerData] = useState(learnerDataItem);
   const history = useHistory();
 
   // console.log("props: " + JSON.stringify(props));
@@ -15,7 +16,7 @@ export const LearnerItem = (props) => {
 
   return (
     <Card>
-      <div className="container">
+      <div className="container" >
             <table className="table">
                 <thead>
                   <tr>
@@ -25,8 +26,10 @@ export const LearnerItem = (props) => {
                     <th>Course Id</th>
                     <th>Approval Status</th>
                     <th>Assignment Id</th>
+                    <th>Assignment Status</th>
                     <th>Score</th>
-                  </tr>
+                    {/* <th>Approval Status</th> */}
+                    </tr>
                 </thead>
                 <tbody>
                   <tr>
@@ -36,19 +39,23 @@ export const LearnerItem = (props) => {
                     <td>{props.learnerData.courseId}</td>
                     <td>{props.learnerData.approvalStatus}</td>
                     <td>{props.learnerData.assignmentId}</td>
+                    <td>{props.learnerData.assignmentStatus}</td>
                     <td>{props.learnerData.learnerScore}</td>
+                    {/* <td>{props.learnerData.approvalStatus}</td> */}
+                    
                   </tr>
                 </tbody>
-                <div>            
-                  <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/learner/edit/${props.learnerData.requestId}`)}>
+            </table>
+             <div>            
+                  <Button variant="warning" style={{ marginRight: 10 }} onClick={  () => history.push({pathname: `/learner/edit/${props.learnerData.requestId}`, state : props.learnerData}) }>
+                  {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => props.onEdit(props.learnerData)}> */}
                     Edit
                   </Button>
                   <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>
                     Delete
                   </Button>
                 </div>
-                  
-            </table>
+          
       </div>
     </Card>
     

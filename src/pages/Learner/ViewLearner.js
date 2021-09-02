@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Card, Modal, Button } from 'react-bootstrap'
 
 import { getAllLearner, deleteLearner, getLearnerById, getLearnerByUser, deleteAllLearner, deleteLearnerUser } from '../../features/learner/learnerAPI'
 
 import { LearnerItem } from '../../components/Learner/LearnerItem'
+import { EditLearner } from './EditLearner'
 
 export const ViewLearner = () => {
   const [learner, setLearner] = useState([])
@@ -43,7 +44,7 @@ export const ViewLearner = () => {
       console.log  (`Search ${search}`)
       setSearchClicked(true)
       setInvalidInput(false)
-      {getAllLearnerData()}
+      getAllLearnerData()
 
       }
     else
@@ -127,9 +128,9 @@ export const ViewLearner = () => {
         await deleteLearner(toDelete)
          setToDelete('')
          setShowModal(false)
-         { search === 'All' && getAllLearnerData()}
-         { search === 'RequestId' && getLearnerDataByRequest(userinput)}
-         { search === 'UserId' && getLearnerDataByUser(userinput)}
+          search === 'All' && getAllLearnerData()
+          search === 'RequestId' && getLearnerDataByRequest(userinput)
+          search === 'UserId' && getLearnerDataByUser(userinput)
        }
       else
               if (search === 'All')

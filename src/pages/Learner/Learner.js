@@ -28,9 +28,9 @@ export const Learner = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add new Learner</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/edit`}>Edit Learner</Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
             </Nav>
           </Col>
         <Col sm={9}>

@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router-dom'
 
 import { ViewLearner } from '../pages/Learner/ViewLearner'
-import AddLearner from '../pages/Learner/AddLearner'
-import EditLearner from '../pages/Learner/EditLearner'
+import { AddLearner } from '../pages/Learner/AddLearner'
+import { EditLearner } from '../pages/Learner/EditLearner'
 
 export const LearnerRoutes = (props) => {
   return (
