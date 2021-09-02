@@ -5,6 +5,7 @@ import { Demo } from '../pages/Demo'
 import { Mentor } from '../pages/Mentor'
 import { Course } from '../pages/Course'
 import { Learner } from '../pages/Learner'
+import { Approver } from '../pages/Approver'
 
 export const PageRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const PageRoutes = () => {
       <Route path="/mentor" component={Mentor} />
       <Route path="/course" component={Course} />
       <Route path="/learner" component={Learner} />
+      <Route path="/approver" component={Approver} />
     </Switch>
   )
 }
