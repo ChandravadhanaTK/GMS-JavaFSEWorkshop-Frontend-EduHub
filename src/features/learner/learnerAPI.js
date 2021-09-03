@@ -3,7 +3,7 @@ import { API } from '../../api'
 export const getAllLearner = async () => {
   try {
     const res = await API.get(`/learner`)
-    console.log(res)
+    console.log(res.data)
   
     return res.data
   } catch (error) {
@@ -15,7 +15,7 @@ export const getAllLearner = async () => {
 export const getLearnerById = async (requestId) => {
   try {
     const res = await API.get(`/learner/${requestId}`)
-    console.log(res)
+    console.log(res.data)
   
     return res.data
   } catch (error) {
@@ -41,7 +41,7 @@ export const updateLearner = async (learner) => {
     const res = await API.put(`/learner/${learner.requestId}`, learner)
     console.log(res)
   
-    return res.data
+    return res
   } catch (error) {
     console.error(error)
     throw new Error('Request failed!')
@@ -53,7 +53,7 @@ export const addLearner = async (learner) => {
     const res = await API.put('/learner', learner)
     console.log(res)
   
-    return res.data
+    return res
   } catch (error) {
     console.error(error)
     throw new Error('Request failed!')

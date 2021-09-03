@@ -193,7 +193,7 @@ export const ViewLearner = () => {
   }
 
   return (
-    <Card className="ViewLearner">
+    <Card >
         <Card.Body>
           <Card.Title>View Learner</Card.Title>
           <Card.Text>
@@ -233,11 +233,30 @@ export const ViewLearner = () => {
 
     <React.Fragment>
       <Card>
+      {/* <table className="table">
+                <thead>
+                  <tr>
+                    <th>Request Id</th>
+                    <th>User Id</th>
+                    <th>Role</th>
+                    <th>Course Id</th>
+                    <th>Approval Status</th>
+                    <th>Assignment Id</th>
+                    <th>Assignment Status</th>
+                    <th>Score</th>
+                 
+                    </tr>
+                </thead>
+      </table> */}
+      </Card>
+      <Card>
         {learner.map(item => {
           return (
             <LearnerItem key={item.id} learnerData={item} onDelete={handleModalOpen} />
           )
         })}
+
+        
       </Card>
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
@@ -251,9 +270,15 @@ export const ViewLearner = () => {
           <Button variant="danger" onClick={handleDelete}>Delete</Button>
         </Modal.Footer>
       </Modal>
-      
-      
-      { search === 'All' && 
+
+      { learner.length > 1 && 
+        <div> <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button></div> 
+      }
+
+      { learner.length === 0 && 
+        <div className="alert alert-warning">No Record found</div> 
+      }
+      {/* { search === 'All' && 
       <div>
           <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
       </div> }
@@ -261,7 +286,7 @@ export const ViewLearner = () => {
       <div>
       <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
       </div>
-      }
+      } */}
     
     </React.Fragment>
     }

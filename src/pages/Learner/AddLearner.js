@@ -21,6 +21,8 @@ export const AddLearner = () => {
   const [assignmentstatusmessage, setAssignmentStatusMessage] = useState('NA'); 
   const [learnerdescription, setLearnerDescription] = useState('New Learner'); 
   const [learnerscore, setLearnerScore] = useState('0'); 
+  const [addStatus, setaddStatus] = useState(false); 
+  const [addClicked, setaddClicked] = useState(false); 
 
    
 
@@ -28,30 +30,35 @@ export const AddLearner = () => {
     console.log(event.target.value)
     const inputRequestId = event.target.value
     setRequestId(inputRequestId)
+    setaddClicked(false)
   }
 
   const handelUserIdChange = (event) => {
     console.log(event.target.value)
     const inputUserId = event.target.value
     setUserId(inputUserId)
+    setaddClicked(false)
   }
 
   const handelRmIdChange = (event) => {
     console.log(event.target.value)
     const inputRmId = event.target.value
     setRmId(inputRmId)
+    setaddClicked(false)
   }
 
   const handelRoleChange = (event) => {
     console.log(event.target.value)
     const inputRole = event.target.value
     setUserRole(inputRole)
+    setaddClicked(false)
   }
 
   const handelCourseIdChange = (event) => {
     console.log(event.target.value)
     const inputCourse = event.target.value
     setCourseId(inputCourse)
+    setaddClicked(false)
   }
 
   const addNewLearner = async (event) => {
@@ -78,6 +85,7 @@ export const AddLearner = () => {
 
     console.log(learnerdata);
     console.log('before try');
+    setaddClicked(true)
     
 
       console.log('Add clicked')
@@ -97,11 +105,27 @@ export const AddLearner = () => {
     // event.preventDefault()
 
     try {
-      await addLearner(learnerdata)
+      const ResStatus = await addLearner(learnerdata)
       // console.log('Record added successfully')
+
+      if (ResStatus.data === "Successfull")
+        {
+          console.log('Add Successfull')
+          setaddStatus(true)
+
+        }
+      else
+      {
+        console.log('Add Failed')
+        setaddStatus(false)
+
+      }
+    
+      
       
     } catch (error) {
       console.error(error)
+      setaddStatus(false)
     }
   }
 
@@ -109,6 +133,12 @@ export const AddLearner = () => {
           <Card className="AddLearner">
             <Card.Body>
               <Card.Title>Add New Learner</Card.Title>
+              {  addClicked &&
+              <>
+              { addStatus && <div className="alert alert-warning">Learner record added Successfully</div>}
+              { !addStatus && <div className="alert alert-warning">Add Failed</div>}
+              </>
+              }
               <Card.Text>
               <Form>
             <Form.Group className="mb-3" > 

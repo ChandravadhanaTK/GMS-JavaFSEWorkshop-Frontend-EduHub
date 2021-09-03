@@ -42,13 +42,24 @@ export const LearnerItem = (props) => {
                     <td>{props.learnerData.assignmentStatus}</td>
                     <td>{props.learnerData.learnerScore}</td>
                     {/* <td>{props.learnerData.approvalStatus}</td> */}
-                    
+                    <div>            
+                  {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={  () => history.push({pathname: `/learner/edit/${props.learnerData.requestId}`, state : props.learnerData}) }>
+                 
+                    Edit
+                  </Button>
+                  <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>
+                    Delete
+                  </Button> */}
+                </div>
                   </tr>
+                  <div>            
+                
+                </div>
                 </tbody>
             </table>
              <div>            
                   <Button variant="warning" style={{ marginRight: 10 }} onClick={  () => history.push({pathname: `/learner/edit/${props.learnerData.requestId}`, state : props.learnerData}) }>
-                  {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => props.onEdit(props.learnerData)}> */}
+                 
                     Edit
                   </Button>
                   <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>

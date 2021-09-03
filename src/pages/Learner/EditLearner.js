@@ -25,20 +25,22 @@ export const EditLearner = (props) => {
   const [assignmentstatusmessage, setAssignmentStatusMessage] = useState(history.location.state.assignmentStatusMessage); 
   const [learnerdescription, setLearnerDescription] = useState(history.location.state.learnerDescription); 
   const [learnerscore, setLearnerScore] = useState(history.location.state.learnerScore); 
-  const [courseidtext, setCourseIdText] = useState(); 
+  const [updateStatus, setUpdateStatus] = useState(false); 
+  const [updateClicked, setUpdateClicked] = useState(false); 
+  const [courseIdText, setCourseIdText] = useState(); 
 
   
-  const courseIdvalue = () => {
-    if (courseid === 1)
-      { setCourseIdText("1. Core Java")}
-    else
-    if (courseid === 2)
-    { setCourseIdText("2. Advance Java")}
-    else
-    if (courseid === 3)
-      { setCourseIdText("3. React")}  
+  // const courseIdvalue = () => {
+  //   if (courseid === 1)
+  //     { setCourseIdText("1. Core Java")}
+  //   else
+  //   if (courseid === 2)
+  //   { setCourseIdText("2. Advance Java")}
+  //   else
+  //   if (courseid === 3)
+  //     { setCourseIdText("3. React")}  
     
-  }
+  // }
 
 
 
@@ -46,23 +48,23 @@ export const EditLearner = (props) => {
   //                       <option value="2">2. Advance Java</option>
   //                       <option value="3">3. React</option>
 
-   const handelRmIdChange = (event) => {
-    console.log(event.target.value)
-    const updatedvalue = event.target.value
-    setRmId(updatedvalue)
-  }
+  //  const handelRmIdChange = (event) => {
+  //   console.log(event.target.value)
+  //   const updatedvalue = event.target.value
+  //   setRmId(updatedvalue)
+  // }
 
-  const handelRoleChange = (event) => {
-    console.log(event.target.value)
-    const updatedvalue = event.target.value
-    setUserRole(updatedvalue)
-  }
+  // const handelRoleChange = (event) => {
+  //   console.log(event.target.value)
+  //   const updatedvalue = event.target.value
+  //   setUserRole(updatedvalue)
+  // }
 
-  const handelCourseIdChange = (event) => {
-    console.log(event.target.value)
-    const updatedvalue = event.target.value
-    setCourseId(updatedvalue)
-  }
+  // const handelCourseIdChange = (event) => {
+  //   console.log(event.target.value)
+  //   const updatedvalue = event.target.value
+  //   setCourseId(updatedvalue)
+  // }
 
   const handelApprovalIdChange = (event) => {
     console.log(event.target.value)
@@ -132,10 +134,11 @@ export const EditLearner = (props) => {
       learnerScore       :  learnerscore
   
      
-    };
+    }
 
     console.log(learnerdata);
     console.log('before try');
+    setUpdateClicked(true)
     
 
       console.log('Update clicked')
@@ -155,11 +158,20 @@ export const EditLearner = (props) => {
     // event.preventDefault()
 
     try {
-      await updateLearner(learnerdata)
-      // console.log('Record added successfully')
+      const ResStatus = await updateLearner(learnerdata)
+      console.log(ResStatus.status)
+      if (ResStatus.status === 200)
+        {
+          console.log('update Successful')
+          setUpdateStatus(true)
+
+        }
+      
       
     } catch (error) {
-      console.error(error)
+      // console.error(error)
+      console.log('update Failed')
+      setUpdateStatus(false)
     }
   }
 
@@ -167,7 +179,14 @@ export const EditLearner = (props) => {
          
           <Card className="AddLearner">
             <Card.Body>
+             
               <Card.Title>Update Learner</Card.Title>
+              {  updateClicked &&
+              <>
+              { updateStatus && <div className="alert alert-warning">Learner record Updated Successfully</div>}
+              { !updateStatus && <div className="alert alert-warning">Update Failed</div>}
+              </>
+              }
               <Card.Text>
               <Form>
             <Form.Group className="mb-3" > 
@@ -270,6 +289,9 @@ export const EditLearner = (props) => {
               Update
             </Button>
             </div>
+            {/* {  learner.status === 200 && 
+                <div className="alert alert-warning">Lerner record Updated Successfully</div> 
+            } */}
           </Form>
                 
               
