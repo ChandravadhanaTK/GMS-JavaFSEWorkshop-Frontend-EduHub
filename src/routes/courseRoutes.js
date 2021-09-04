@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
-import { ViewAllCourse, AddCourse, EditCourse } from '../pages/Course'
+import { ViewAllCourse, AddCourse, EditCourse, ViewCourse } from '../pages/Course'
 
 export const CourseRoutes = (props) => {
    console.log('entered Course Route');
@@ -12,6 +12,7 @@ export const CourseRoutes = (props) => {
       <Route path={`${props.path}/all`} component={ViewAllCourse} />
       <Route path={`${props.path}/add`} component={AddCourse} />
       <Route path={`${props.path}/edit/:courseId`} component={EditCourse} />
+      <Route path={`${props.path}/view/:courseId`} component={ViewCourse} />
       {/* <Route path={`${props}`} component={EditCourse} /> */}
 
       {/* history.push(`/edit/${props.courseData.courseId}`)} */}

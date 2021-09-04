@@ -11,7 +11,23 @@ export const CourseItem = (props) => {
       <Card.Body>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 1 }}>
-            <Card.Text>
+         
+          <Card.Text>
+            <table className="table" size="sm">                
+                  <tr>
+                    <td xs={6}>{props.courseData.courseId}</td>
+                    <td xs={6}>{props.courseData.courseName}</td>
+                    <td xs={6}>{props.courseData.courseDesc}</td>
+                    {/* <td xs={6}>{props.courseData.skillReqd}</td>
+                    <td>{props.courseData.createdOn}</td>
+                    <td>{props.courseData.lastUpdatedOn}</td> */}
+                  </tr>              
+          </table>
+          </Card.Text>
+          </div>
+       
+            {/* </div>                  */}
+            {/* <Card.Text>
                {props.courseData.courseId} 
                {'                     '}
                {props.courseData.courseName} 
@@ -24,9 +40,13 @@ export const CourseItem = (props) => {
               {'                     '}
               {props.courseData.lastUpdatedOn}
 
-            </Card.Text>
-          </div>
+            </Card.Text> */}   
+              
+     
           <div>
+            <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/course/view/${props.courseData.courseId}`)}>
+            View
+            </Button>
             <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/course/edit/${props.courseData.courseId}`)}>
             {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => history.push(`/edit/${props.courseData.courseId}`)}> */}
             {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={() => props.onEdit(props.courseData.courseId)}> */}
@@ -34,10 +54,9 @@ export const CourseItem = (props) => {
             </Button>
             <Button variant="danger" onClick={() => props.onDelete(props.courseData.courseId)}>
             Delete
-            //props.path}/edit/:courseId`
             </Button>
           </div>
-        </div>
+       </div>
       </Card.Body>
     </Card>
   )

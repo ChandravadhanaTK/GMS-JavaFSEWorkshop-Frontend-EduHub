@@ -108,7 +108,7 @@ export const ViewAllCourse = () => {
   return (
           
     <React.Fragment>
-      <div>
+      {/* <div>
              <input type="radio" as={Row} value="CourseId" id="course"
               name="search" />
                <label>View by Course Id</label>
@@ -119,18 +119,20 @@ export const ViewAllCourse = () => {
       </div>
       <div>
       <button type="button">Search </button> 
-      </div>
+      </div> */}
        
            <div>
             <table className="table">
                 <thead>
-                  <tr>
+                  <tr sm={1}>
                     <th>Course Id</th>
                     <th>Course Name</th>
                     <th>Course Description</th>
-                    <th>Skill Reqd</th>
+                    {/* <th>Skill Reqd</th>
                     <th>Created On</th>
                     <th>Last Updated On</th>
+                    <th>Created On</th>
+                    <th>Last Updated On</th>   */}
                   </tr>
                 </thead>
             </table>

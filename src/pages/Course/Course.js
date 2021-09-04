@@ -18,7 +18,7 @@ export const Course = () => {
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link as={Link} to={`${path}/all`}>View Course</Nav.Link>
+                <Nav.Link as={Link} to={`${path}/all`}>View Courses</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add Course</Nav.Link>
