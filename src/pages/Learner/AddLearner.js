@@ -1,189 +1,239 @@
-import React, {Component} from 'react';
-// import { Card, Form ,Row, Col, Button} from 'react-bootstrap'
-// import { Dropdown } from 'react-bootstrap';
+import React from 'react';
 import './Learner.css' ;
+import { useHistory } from 'react-router-dom'
+import { useState } from 'react';
 
-import { Card, Button, Form, Container, Col, Row, Dropdown, ProgressBar } from 'react-bootstrap'
-// import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
+import { Card, Button, Form, Container, Col, Row } from 'react-bootstrap'
+import { addLearner } from '../../features/learner/learnerAPI';
 
-export default class AddLearner extends Component {
-    render () { 
+export const AddLearner = () => {
+  const history = useHistory()
+  const [requestid, setRequestId] = useState(); 
+  const [userid, setUserId] = useState(); 
+  const [userrole, setUserRole] = useState(); 
+  const [courseid, setCourseId] = useState(); 
+  const [rmId, setRmId] = useState(); 
+  const [approvalid, setApprovalId] = useState('001'); 
+  const [approvalstatus, setApprovalStatus] = useState('Initiated'); 
+  const [approvalstatusmessage, setApprovalStatusMessage] = useState('Initiated'); 
+  const [assignmentid, setAssignmentId] = useState('000'); 
+  const [assignmentstatus, setAssignmentStatus] = useState('00'); 
+  const [assignmentstatusmessage, setAssignmentStatusMessage] = useState('NA'); 
+  const [learnerdescription, setLearnerDescription] = useState('New Learner'); 
+  const [learnerscore, setLearnerScore] = useState('0'); 
+  const [addStatus, setaddStatus] = useState(false); 
+  const [addClicked, setaddClicked] = useState(false); 
+
+   
+
+  const handelRequestIdChange = (event) => {
+    console.log(event.target.value)
+    const inputRequestId = event.target.value
+    setRequestId(inputRequestId)
+    setaddClicked(false)
+  }
+
+  const handelUserIdChange = (event) => {
+    console.log(event.target.value)
+    const inputUserId = event.target.value
+    setUserId(inputUserId)
+    setaddClicked(false)
+  }
+
+  const handelRmIdChange = (event) => {
+    console.log(event.target.value)
+    const inputRmId = event.target.value
+    setRmId(inputRmId)
+    setaddClicked(false)
+  }
+
+  const handelRoleChange = (event) => {
+    console.log(event.target.value)
+    const inputRole = event.target.value
+    setUserRole(inputRole)
+    setaddClicked(false)
+  }
+
+  const handelCourseIdChange = (event) => {
+    console.log(event.target.value)
+    const inputCourse = event.target.value
+    setCourseId(inputCourse)
+    setaddClicked(false)
+  }
+
+  const addNewLearner = async (event) => {
+
+    event.preventDefault()
+    const learnerdata = {  
+                      
+      requestId          : requestid,
+      userId             : userid,
+      role               : userrole,
+      courseId           : courseid,
+      rmid               : rmId,
+      approvalId         : approvalid,
+      approvalStatus     : approvalstatus,
+      statusMessage      : approvalstatusmessage,
+      assignmentId       :  assignmentid,
+      assignmentStatus   :  assignmentstatus,
+      assignmentStatusMessage  :   assignmentstatusmessage,
+      learnerDescription  :  learnerdescription,
+      learnerScore       :  learnerscore
+  
+     
+    };
+
+    console.log(learnerdata);
+    console.log('before try');
+    setaddClicked(true)
+    
+
+      console.log('Add clicked')
+      // console.log(`Request Id: ${requestId}`)
+      // console.log(`User Id: ${userId}`)
+      // console.log(`role: ${userRole}`)
+      // console.log(`COurse Id: ${courseId}`)
+      // console.log(`RM Id: ${rmId}`)
+      // console.log(`Approval ID ${approvalId}`)
+      // console.log(`Approval Status: ${approvalStatus}`)
+      // console.log(`Approval Status Message: ${approvalStatusMessage}`)
+      // console.log(`Assignment Id: ${assignmentId}`)
+      // console.log(`Assignment Status: ${assignmentStatus}`)
+      // console.log(`Assignment Status Message Id: ${assignmentStatusMessage}`)
+      // console.log(`Learner Desc: ${learnerDescription}`)
+      // console.log(`Learner Score Id: ${learnerScore}`)
+    // event.preventDefault()
+
+    try {
+      const ResStatus = await addLearner(learnerdata)
+      // console.log('Record added successfully')
+
+      if (ResStatus.data === "Successfull")
+        {
+          console.log('Add Successfull')
+          setaddStatus(true)
+
+        }
+      else
+      {
+        console.log('Add Failed')
+        setaddStatus(false)
+
+      }
+    
+      
+      
+    } catch (error) {
+      console.error(error)
+      setaddStatus(false)
+    }
+  }
+
       return (
           <Card className="AddLearner">
             <Card.Body>
-              <Card.Title>Add Learner</Card.Title>
+              <Card.Title>Add New Learner</Card.Title>
+              {  addClicked &&
+              <>
+              { addStatus && <div className="alert alert-warning">Learner record added Successfully</div>}
+              { !addStatus && <div className="alert alert-warning">Add Failed</div>}
+              </>
+              }
               <Card.Text>
               <Form>
-            <Form.Group className="mb-3" controlId="formBasicName"> 
+            <Form.Group className="mb-3" > 
               <Container>
                 <Form.Group as={Row} className="mb-3" controlId="requestid">
                     <Form.Label column sm="6">Request Id</Form.Label>
                     <Col sm="5">
-                      <Form.Control type="text" placeholder="Autogenerated Request Id" readOnly />
+                      <Form.Control type="text" placeholder="Enter Request Id" value={requestid} onChange={handelRequestIdChange} />
                     </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} className="mb-3" controlId="userid">
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="userid">
                     <Form.Label column sm="6">User Id</Form.Label>
                     <Col sm="5">
-                      <Form.Control type="text" placeholder="Enter User Id"  />
+                      <Form.Control type="text" placeholder="Enter User Id"  value={userid} onChange={handelUserIdChange} />
                     </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} className="mb-3" controlId="role">
-                    <Form.Label column sm="6">Role / Name</Form.Label>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="userrole">
+                    <Form.Label column sm="6">Role</Form.Label>
                     <Col sm="5">
-                      <Form.Select defaultValue="Select">
+                      <Form.Select defaultValue="Select"  onChange={handelRoleChange}>
                         <option>Select</option>
-                        <option>Learner</option>
-                        <option>Mentor</option>
-
+                        <option value="Learner">Learner</option>
+                        <option value="Mentor">Mentor</option>
                       </Form.Select>
                     </Col>
-                  </Form.Group>
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Role</Form.Label></font></Col>
-                  <Col><Dropdown>
-                    <Dropdown.Toggle variant="Success" role="dropdown-basic">
-                      Select Role of Learner
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">Learner</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Mentor</Dropdown.Item>
-                    </Dropdown.Menu>
-
-                  </Dropdown>
-                  </Col>
-                </Row> */}
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Course Identification Number</Form.Label></font></Col>
-                  <Col><Form.Control type="courseId" placeholder="Enter Course Id of Learner" /></Col>
-                </Row> */}
+                </Form.Group>
                 <Form.Group as={Row} className="mb-3" controlId="courseid">
-                    <Form.Label column sm="6">Course Id</Form.Label>
-                    <Col sm="5"><Form.Control type="text" placeholder="Enter Course Id"/></Col>
-                  </Form.Group>
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Reporting Manager Identification Number</Form.Label></font></Col>
-                  <Col><Form.Control type="rmid" placeholder="Enter Reporting Manager Id of Learner" /></Col>
-                </Row> */}
-                <Form.Group as={Row} className="mb-3" controlId="rmid">
-                    <Form.Label column sm="6">Reporting manager</Form.Label>
-                    <Col sm="5">
-                      <Form.Control type="text" placeholder="Enter RM Id/Name"  />
-                    </Col>
-                  </Form.Group>
-
-                  <Form.Group as={Row} className="mb-3" controlId="courseId">
                     <Form.Label column sm="6">Course ID / Name</Form.Label>
                     <Col sm="5">
-                      <Form.Select defaultValue="Select">
+                      <Form.Select defaultValue="Select" onChange={handelCourseIdChange}>
                         <option>Select</option>
-                        <option>1. Core Java</option>
-                        <option>2. Advance Java</option>
-                        <option>3. React</option>
+                        <option value="001">1. Core Java</option>
+                        <option value="002">2. Advance Java</option>
+                        <option value="003">3. React</option>
                       </Form.Select>
                     </Col>
-                  </Form.Group>
-
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Approval Identification Number</Form.Label></font></Col>
-                  <Col><Form.Control type="approvalId" placeholder="Enter Approval Id of Learner" /></Col>
-                </Row> */}
-                <Form.Group as={Row} className="mb-3" controlId="approvalid">
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="rmId">
+                    <Form.Label column sm="6">Reporting manager</Form.Label>
+                    <Col sm="5">
+                      <Form.Control type="text" placeholder="Enter RM Id/Name"  value={rmId} onChange={handelRmIdChange} />
+                    </Col>
+                </Form.Group>                 
+                <Form.Group as={Row} className="mb-3" controlId="approvalId">
                     <Form.Label column sm="6">Approval ID</Form.Label>
                     <Col sm="5">
                       <Form.Control type="text" value="01" readOnly/>
                     </Col>
                 </Form.Group>
-
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Approval Status</Form.Label></font></Col>
-                  <Col><Dropdown>
-                    <Dropdown.Toggle variant="Success" approvalStatus="dropdown-basic">
-                      Select Approval Status of Learner
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">Initiated</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Approved</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Rejected</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  </Col>
-                </Row> */}
-
-                <Form.Group as={Row} className="mb-3" controlId="approvalstatus">
+                <Form.Group as={Row} className="mb-3" controlId="approvalStatus">
                     <Form.Label column sm="6">Approval Status</Form.Label>
                     <Col sm="5">
                       <Form.Control type="text" value="Initiated" readOnly/>
                     </Col>
                 </Form.Group>
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Assignment Identification Number</Form.Label></font></Col>
-                  <Col><Form.Control type="assignmentId" placeholder="Enter Assignment Id of Learner" /></Col>
-                </Row> */}
-                <Form.Group as={Row} className="mb-3" controlId="assignmentid">
-                    <Form.Label column sm="6">Assignment Id</Form.Label>
+                <Form.Group as={Row} className="mb-3" controlId="statusMessage">
+                    <Form.Label column sm="6">Approval Status Message</Form.Label>
                     <Col sm="5">
-                      <Form.Control type="text" value="TBC" readOnly/>
+                      <Form.Control type="text" value="Initiated" readOnly/>
                     </Col>
                 </Form.Group>
-              
-                
-                  {/* <Col><font color="Green"><Form.Label>Assignment Status</Form.Label></font></Col>
-                  <Col><Dropdown>
-                    <Dropdown.Toggle variant="Success" assignmentStatus="dropdown-basic">
-                      Select Assignment Status of Learner
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">Initiated</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Approved</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Rejected</Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                  </Col> */}
-                  <Form.Group as={Row} className="mb-3" controlId="assignmentstatus">
+                <Form.Group as={Row} className="mb-3" controlId="assignmentId">
+                    <Form.Label column sm="6">Assignment Id</Form.Label>
+                    <Col sm="5">
+                      <Form.Control type="text" value="000" readOnly/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="assignmentStatus">
                     <Form.Label column sm="6">Assignment Status</Form.Label>
+                    <Col sm="5">
+                      <Form.Control type="text" value="00" readOnly/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="assignmentStatusMessage">
+                    <Form.Label column sm="6">Assignment Status Message</Form.Label>
                     <Col sm="5">
                       <Form.Control type="text" value="NA" readOnly/>
                     </Col>
-                  </Form.Group>
-                
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Assignment Status Message</Form.Label></font></Col>
-                  <Col><Form.Control type="assignmentStatusMessage" placeholder="Enter Assignment Status Message of Learner" /></Col>
-                </Row> */}
-                  <Form.Group as={Row} className="mb-3" controlId="assignmentstatusmessage">
-                    <Form.Label column sm="6">Assignment Status Message</Form.Label>
-                    <Col sm="5">
-                      <Form.Control type="text" value="" readOnly/>
-                    </Col>
-                  </Form.Group>
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Learner Description</Form.Label></font></Col>
-                  <Col><Form.Control type="learnerDescription" placeholder="Enter Learner Description" /></Col>
-                </Row> */}
-                  <Form.Group as={Row} className="mb-3" controlId="learnerdescription">
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="learnerDescription">
                     <Form.Label column sm="6">Learner Description</Form.Label>
                     <Col sm="5">
                       <Form.Control type="text" value="New Learner" readOnly/>
                     </Col>
-                  </Form.Group>
-                {/* <Row>
-                  <Col><font color="Green"><Form.Label>Learner Score</Form.Label></font></Col>
-                  <Col><Form.Control type="learnerScore" placeholder="Enter Learner Score" /></Col>
-                </Row> */}
-                  <Form.Group as={Row} className="mb-3" controlId="learnerscore">
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="learnerScore">
                     <Form.Label column sm="6">Learner Score</Form.Label>
                     <Col sm="5">
                       <Form.Control type="text" value="0" readOnly/>
                     </Col>
-                  </Form.Group>
+                </Form.Group>
               </Container>
-              {/* <Form.Text className="text-muted">
-                Learner stuff :)
-              </Form.Text> */}
             </Form.Group>
             <div className ="d-grid">
-            <Button variant="primary" onClick={this.addNewLearner}>
+            <Button variant="primary" onClick={addNewLearner}>
               Submit
             </Button>
             </div>
@@ -197,33 +247,32 @@ export default class AddLearner extends Component {
   )
 }
 
-addNewLearner(){
-   return (
-    console.log('Add clicked')
-    //  <h1>
-    //  <div className="ViewLearnerList"> 
-    //    display details here      
-    //  </div>  
-    //  </h1>
+// addNewLearner(){
+//    return (
+//     console.log('Add clicked')
+//     //  <h1>
+//     //  <div className="ViewLearnerList"> 
+//     //    display details here      
+//     //  </div>  
+//     //  </h1>
 
   
 
-  )
+//   )
   
-}
+// }
 
-validateUser(){
-  return (
-    console.log('Validate user')
-    //  <h1>
-    //  <div className="ViewLearnerList"> 
-    //    display details here      
-    //  </div>  
-    //  </h1>
+// validateUser(){
+//   return (
+//     console.log('Validate user')
+//     //  <h1>
+//     //  <div className="ViewLearnerList"> 
+//     //    display details here      
+//     //  </div>  
+//     //  </h1>
 
   
 
-  )
+//   )
 
-}
-}
+// }

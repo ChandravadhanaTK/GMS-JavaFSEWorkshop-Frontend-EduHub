@@ -1,183 +1,298 @@
-import React, {Component} from 'react';
-import './Learner.css' ;
-import { Button } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
-import { Row, Col } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Row, Col, Card, Modal, Button } from 'react-bootstrap'
 
-export default class ViewLearner extends Component {
+import { getAllLearner, deleteLearner, getLearnerById, getLearnerByUser, deleteAllLearner, deleteLearnerUser } from '../../features/learner/learnerAPI'
 
-  constructor(props){
-    super(props)
-    this.state = {
-      learnerlist : 
-      [
-          {learnerid: 10001, userid: 502002, course: 'React'},
-          {learnerid: 10002, userid: 502005, course: 'Java'},
-          {learnerid: 10003, userid: 502008, course: 'Angular'},
-      ],
-      search: 'All',
-      searchClicked: false,
-      userinput: '',
-      invalidInput: false
-    }
+import { LearnerItem } from '../../components/Learner/LearnerItem'
+import { EditLearner } from './EditLearner'
 
-    this.handleChange=(e)=>{
-      this.setState({
-        // search: e.target.value, 
-        // userinput: e.target.value
-        searchClicked:false,
-        invalidInput:false,
-        [e.target.name]: e.target.value
-      })
-    }
+export const ViewLearner = () => {
+  const [learner, setLearner] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [toDelete, setToDelete] = useState('')
+  const [search, setSearch] = useState('All')
+  const [userinput, setUserInput] = useState('')
+  const [searchClicked, setSearchClicked] = useState(false)
+  const [invalidInput, setInvalidInput] = useState(false)
+     
+  const handleOptionChange = (e) => {
+      setLearner([])
+      setSearchClicked(false)
+      setInvalidInput(false)
+      setSearch(e.target.value)
+  }
 
-    this.onReset=()=>{
-  
-      this.setState({searchClicked:false})
-      this.setState({invalidInput:false})
-      
-    }
+  const handleKeyChange = (e) => {
+  setLearner([])
+  setSearchClicked(false)
+  setInvalidInput(false)
+  setUserInput(e.target.value)
 
-    this.onSubmit=()=>{
+}
 
-      if (this.state.search === 'All')
-        {
-        console.log  (`Search ${this.state.search}`)
-        this.setState({searchClicked:true})
-        this.setState({invalidInput:false})
-        }
-      else
-        { 
-        console.log(`Search ${this.state.search} - ${this.state.userinput}`)
-        if (this.state.userinput === '')
-            {
-              this.setState({invalidInput:true})
-              this.setState({searchClicked:false})
-            }
-        else
-          { this.setState({invalidInput:false})
-            this.setState({searchClicked:true})
-          }   
-        }
-      ;   
-    }
-
-    this.delete1Record=()=>{
-  
-      console.log(`Delete 1 record`)
-      
-    }
-
-    this.editRecord=()=>{
-  
-      console.log(`edit 1 record`)
-      
-    }
-
-    this.deleteAll=()=>{
-  
-      console.log("Delete all records from EDuHub")
-      
-    }
-
-    this.deleteAllForUser=()=>{
-  
-      console.log("Delete all records for User from EDuHub")
-      
-    }
-
-    this.viewRecord=()=>{
-  
-      console.log("Trigger View Popup")
-      
-    }
+  const onReset = () => {
+      setLearner([])
+      setSearchClicked(false)
+      setInvalidInput(false)
     
   }
 
-    render () { 
+  const onSubmit=()=>{
 
-    return (
-      <Card className="ViewLearner">
+    if (search === 'All')
+      {
+      console.log  (`Search ${search}`)
+      setSearchClicked(true)
+      setInvalidInput(false)
+      getAllLearnerData()
+
+      }
+    else
+      { 
+      console.log(`Search ${search} - ${userinput}`)
+      if (userinput === '')
+          {
+            setSearchClicked(false)
+            setInvalidInput(true)
+          }
+      else
+        { setSearchClicked(true)
+          setInvalidInput(false)
+             if (search === 'RequestId')
+                 {getLearnerDataByRequest(userinput)}
+              else 
+              {getLearnerDataByUser(userinput)}
+        }   
+      }
+    ;   
+  }
+
+  
+  // useEffect(() => {getLearnerData()  }, [])
+
+  const getLearnerDataByRequest = async (userinput) => {
+    try {
+      const LearnerData = await getLearnerById(userinput)
+      // console.log(LearnerData)
+
+      setLearner(LearnerData)
+    } catch (error) {
+      // TODO: notify user
+    }
+  }
+
+  const getAllLearnerData = async () => {
+    try {
+      const LearnerData = await getAllLearner()
+      // console.log(LearnerData)
+
+      setLearner(LearnerData)
+    } catch (error) {
+      // TODO: notify user
+    }
+  }
+
+  const getLearnerDataByUser = async (userinput) => {
+    try {
+      const LearnerData = await getLearnerByUser(userinput)
+      // console.log(LearnerData)
+
+      setLearner(LearnerData)
+    } catch (error) {
+      // TODO: notify user
+    }
+  }
+
+  const handleModalOpen = (requestId) => {
+    setToDelete(requestId)
+    setShowModal(true)
+  }
+
+  const handleModalOpenNew = () => {
+    setToDelete('')
+    setShowModal(true)
+  }
+
+  const handleModalClose = () => {
+    setShowModal(false)
+  }
+
+  const handleDelete = async () => {
+    try {
+
+      console.log(`to delete - ${toDelete}`)
+      if (toDelete !== '')
+       { 
+         
+        console.log(`delete row`)
+        await deleteLearner(toDelete)
+         setToDelete('')
+         setShowModal(false)
+          search === 'All' && getAllLearnerData()
+          search === 'RequestId' && getLearnerDataByRequest(userinput)
+          search === 'UserId' && getLearnerDataByUser(userinput)
+       }
+      else
+              if (search === 'All')
+                {
+                  console.log(`delete ALL `)
+                  await deleteAll()
+                  setToDelete('')
+                  setShowModal(false)
+                  setSearchClicked(false)
+                  getAllLearnerData()}
+              else
+                if (search === 'RequestId')
+                        {
+                          console.log(`delete request`)
+                          await deleteLearner(userinput)
+                          setToDelete('')
+                          setShowModal(false)
+                          setSearchClicked(false)
+                          getLearnerDataByRequest(userinput)
+                        }
+                else 
+                  {
+                    console.log(`delete user`)
+                    await deleteAllForUser(userinput)
+                    setToDelete('')
+                    setShowModal(false)
+                    setSearchClicked(false)
+                    getLearnerDataByUser(userinput)
+                  }  
+     
+    } catch (error) {
+      
+    }
+  }
+
+  const deleteAll = async () => {
+    try {
+      await deleteAllLearner()
+
+      // {getAllLearnerData()}
+           
+      
+     
+    } catch (error) {
+      
+    }
+  }
+
+  const deleteAllForUser = async (userinput) => {
+    try {
+      await deleteLearnerUser(userinput)
+
+        // {getLearnerDataByUser(userinput)}
+           
+      
+     
+    } catch (error) {
+      
+    }
+  }
+
+  return (
+    <Card >
         <Card.Body>
           <Card.Title>View Learner</Card.Title>
           <Card.Text>
             <form>
               <input type="radio" as={Row} value="RequestId" id="request"
-                onChange={this.handleChange} name="search" />
+                onChange={handleOptionChange} name="search" />
               <label>View by Request Id</label>
               {'    '}
               <input type="radio" as={Col} value="UserId" id="user"
-                onChange={this.handleChange} name="search"/>
+                onChange={handleOptionChange} name="search"/>
               <label>View by User Id</label>
               {'    '}
               <input type="radio" as={Col} value="All" id="all"
-                onChange={this.handleChange} name="search" defaultChecked/>
+                onChange={handleOptionChange} name="search" defaultChecked/>
               <label>View All</label>
             </form>
           
-          {this.state.search !== 'All' && 
+          {search !== 'All' && 
                 <form className="input">
-                  <input type="text" onChange={this.handleChange} value={this.state.userinput} name="userinput" />
+                  <input type="text" onChange={handleKeyChange} value={userinput} name="userinput" />
                 </form>
            }
           
           </Card.Text>
         <div>
-            <button type="button" onClick={this.onSubmit}>Search</button> 
-            <button type="button" onClick={this.onReset}>Clear</button>
-            {this.state.invalidInput && 
+            <button type="button" onClick={onSubmit}>Search</button> 
+            <button type="button" onClick={onReset}>Clear</button>
+            {invalidInput && 
               <div className="alert alert-warning">Please provide search key</div>
             }
         </div>
-      
-        {this.state.searchClicked && 
-          <>
-          <div className="container">
-            <table className="table">
+       </Card.Body> 
+    
+    
+
+    { searchClicked &&
+
+    <React.Fragment>
+      <Card>
+      {/* <table className="table">
                 <thead>
                   <tr>
                     <th>Request Id</th>
                     <th>User Id</th>
-                    <th>Course</th>
-                  </tr>
+                    <th>Role</th>
+                    <th>Course Id</th>
+                    <th>Approval Status</th>
+                    <th>Assignment Id</th>
+                    <th>Assignment Status</th>
+                    <th>Score</th>
+                 
+                    </tr>
                 </thead>
-                <tbody>
-                    {
-                      this.state.learnerlist.map (
-                        learner =>
-                          <tr >
-                            <td>{learner.learnerid}</td>
-                            <td>{learner.userid}</td>
-                            <td>{learner.course}</td>
-                            <div>
-                            <Button variant="info" style={{ marginRight: 10 }} onClick={this.viewRecord}>
-                                  View
-                                </Button>
-                                <Button variant="warning" style={{ marginRight: 10 }} onClick={this.editRecord}>
-                                  Edit
-                                </Button>
-                                <Button variant="danger" onClick={this.delete1Record}>
-                                  Delete
-                                </Button>
-                            </div>
-                          </tr>
-                      )
-                    }
-                </tbody>
-            </table>
-          </div>   
-          
-          { this.state.search === 'All' && <div>
-              <Button variant="danger" onClick={this.deleteAll}>Delete All</Button>
-          </div> }
-          { this.state.search === 'UserId' && <div>
-              <Button variant="danger" onClick={this.deleteAllForUser}>Delete All</Button>
-          </div> }
-          </>
-        }
-        </Card.Body>
+      </table> */}
       </Card>
-    ) 
+      <Card>
+        {learner.map(item => {
+          return (
+            <LearnerItem key={item.id} learnerData={item} onDelete={handleModalOpen} />
+          )
+        })}
+
+        
+      </Card>
+      <Modal show={showModal} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Learner</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>Delete</Button>
+        </Modal.Footer>
+      </Modal>
+
+      { learner.length > 1 && 
+        <div> <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button></div> 
+      }
+
+      { learner.length === 0 && 
+        <div className="alert alert-warning">No Record found</div> 
+      }
+      {/* { search === 'All' && 
+      <div>
+          <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
+      </div> }
+      { search === 'UserId' && 
+      <div>
+      <Button variant="danger" onClick={handleModalOpenNew}>Delete All</Button>
+      </div>
+      } */}
+    
+    </React.Fragment>
     }
 
+      
+    
+    </Card>
+  )
 }
