@@ -1,4 +1,4 @@
-import { Card, Modal, Button } from 'react-bootstrap'
+import { Card, Modal, Button, Table } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
 import {  getAllMentors, 
           deleteMentor, 
@@ -80,21 +80,25 @@ export const ViewAllMentor = () => {
   return (
     <React.Fragment>
       <Card>
-        {mentors.map(mentor => {
-          console.log(JSON.stringify(mentor));
-          return (
-            <MentorItem key={mentor.availabilityid}
-                        mentorData={mentor}
-                        onDelete={handleDeleteModalOpen} 
-                        // onEdit={handleEditModalOpen}
-            />
-          )
-        })}
+        <Table striped bordered hover variant="dark">
+          <tbody>
+            {mentors.map(mentor => {
+              console.log(JSON.stringify(mentor));
+              return (
+                <MentorItem key={mentor.availabilityid}
+                            mentorData={mentor}
+                            onDelete={handleDeleteModalOpen} 
+                            // onEdit={handleEditModalOpen}
+                />
+              )
+            })}
+          </tbody>        
+        </Table>
       </Card>
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
           <Button variant="danger" size="lg"
-            style={{ width: "100%", marginTop: "10px" }}
+            style={{ width: "20%", marginTop: "10px" }}
             onClick={handleDeleteAllModalOpen}>
             Delete All
           </Button>
