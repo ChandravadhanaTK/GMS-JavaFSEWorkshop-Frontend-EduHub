@@ -25,11 +25,9 @@ export const MentorItem = (props) => {
     let date1 = date.toDateString().slice(8,10);
     let month = date.toDateString().slice(4,7);
     let year = date.toDateString().slice(11,15);
-    let time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'});
-    
-    // console.log(day+", "+date1+"-"+month+"-"+year+"  "+time); // Wed, 04-Aug-2021  10:00 AM
-    //return (day+", "+date1+"-"+month+"-"+year+"  \n"+time);
-    return `${day}, ${date1}-${month}-${year} ${time}`;
+    let time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit'}); 
+
+    return `${day}, ${date1}-${month}-${year} ${time}`; //Thu, 16-Sep-2021 09:00 AM
 
   }
 
@@ -40,17 +38,15 @@ export const MentorItem = (props) => {
           <td>{formatDateTime(mentorData.startdatetime)}</td>
           <td>{formatDateTime(mentorData.enddatetime)}</td>
           <td>
-            <Button variant="warning" style={{ marginRight: 10 }} 
+            <Button variant="warning" style={{ marginLeft: 10 }} 
                     onClick={() => history.push(`/mentor/edit/${props.mentorData.userid}`)} >
                     Edit
             </Button>
-          </td>
-          <td>
-            <Button variant="danger"  
+            <Button variant="danger" style={{ marginLeft: 20 }}  
                     onClick={() => props.onDelete(props.mentorData.userid)}>
                     Delete
             </Button>                        
-          </td>
+          </td>          
         </tr>
   )
 }

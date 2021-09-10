@@ -77,10 +77,20 @@ export const ViewAllMentor = () => {
     }
 
   }
+
   return (
     <React.Fragment>
       <Card>
-        <Table striped bordered hover variant="dark">
+        <Table striped bordered hover>
+          <thead>
+            <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
+              <th>Mentor Name</th>
+              <th>Skill</th>
+              <th>Start Date / Time</th>
+              <th>End Date / Time</th>
+              <th colspan="2">Action</th>                       
+            </tr>
+          </thead>
           <tbody>
             {mentors.map(mentor => {
               console.log(JSON.stringify(mentor));
@@ -97,7 +107,7 @@ export const ViewAllMentor = () => {
       </Card>
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
-          <Button variant="danger" size="lg"
+          <Button variant="danger" size="md"
             style={{ width: "20%", marginTop: "10px" }}
             onClick={handleDeleteAllModalOpen}>
             Delete All
