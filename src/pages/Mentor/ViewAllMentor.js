@@ -80,7 +80,7 @@ export const ViewAllMentor = () => {
 
   return (
     <React.Fragment>
-      <Card>
+      {/* <Card> */}
         <Table striped bordered hover>
           <thead>
             <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
@@ -103,7 +103,7 @@ export const ViewAllMentor = () => {
             })}
           </tbody>        
         </Table>
-      </Card>
+      {/* </Card> */}
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
           <Button variant="danger" size="md"

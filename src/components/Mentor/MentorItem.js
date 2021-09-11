@@ -43,7 +43,7 @@ export const MentorItem = (props) => {
                     onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
                     Edit
             </Button> {' '}
-            <Button variant="danger" size='sm'  
+            <Button variant="danger" size='sm'  style={{ marginLeft: 5 }} 
                     onClick={() => onDelete(mentorData.userid)}>
                     Delete
             </Button> 

@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Table } from 'react-bootstrap'
 
 export const MentorItem1 = (props) => {
 
@@ -29,48 +29,29 @@ export const MentorItem1 = (props) => {
     const history = useHistory();
 
     return (
-        <Card>
-            <div className="container">
-                <table className="table">
-                    <thead>
-                        <tr>    
-                            <th>User Id</th>
-                            <th>User Name</th>
-                            <th>Start Date/Time</th>
-                            <th>End Date/Time</th>
-                            <th>Mentor skill</th>
-                            {/* <th>Mentored Hours</th>
-                            <th>Mentor-Rating</th>
-                            <th>AboutMentor</th> */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{props.mentorData.userid}</td>
-                            <td>{props.mentorData.username}</td>
-                            <td>{formatDateTime(props.mentorData.startdatetime)}</td>
-                            <td>{formatDateTime(props.mentorData.enddatetime)}</td>
-                            <td>{props.mentorData.mentoringskill}</td>
-                            {/* <td>{props.mentorData.mentoredhours}</td>
-                            <td>{props.mentorData.mentorrating}</td>
-                            <td>{props.mentorData.aboutmentor}</td> */}
-
-                            <div className="row">            
-                                <Button variant="warning" size ="sm"
-                                        onClick={() => history
-                                                .push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
-                                    Edit
-                                </Button>
-                                <Button variant="danger" size="sm" style={{ marginTop: 5 }} 
-                                        onClick={() => props.onDelete(props.mentorData.userid)}>
-                                    
-                                    Delete
-                                </Button>
-                            </div>
-                        </tr>
-                    </tbody> 
-                </table>
-            </div>
-        </Card>
+        <tr>
+            {/* <td>{props.mentorData.userid}</td> */}
+            <td>{props.mentorData.username}</td>
+            <td>{formatDateTime(props.mentorData.startdatetime)}</td>
+            <td>{formatDateTime(props.mentorData.enddatetime)}</td>
+            <td>{props.mentorData.mentoringskill}</td>
+            {/* <td>{props.mentorData.mentoredhours}</td>
+                <td>{props.mentorData.mentorrating}</td>
+                <td>{props.mentorData.aboutmentor}</td> */}
+            {/* <div>             */}
+            <td>
+                <Button variant="warning" size ="sm" style={{ marginLeft: 20 }} 
+                        onClick={() => history
+                                .push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
+                    Edit
+                </Button>
+                <Button variant="danger" size="sm" style={{ marginLeft: 10 }} 
+                        onClick={() => props.onDelete(props.mentorData.userid)}>
+                    
+                    Delete
+                </Button>
+            {/* </div> */}
+            </td>
+        </tr>
     )
 }

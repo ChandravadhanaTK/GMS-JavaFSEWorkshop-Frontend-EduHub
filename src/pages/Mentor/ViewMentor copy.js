@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 // import { useParams, useHistory } from 'react-router'
-import { Card, Button, Form, Modal, Table } from 'react-bootstrap'
+import { Card, Button, Form, Modal } from 'react-bootstrap'
 import { getMentorById, deleteMentor,  updateMentor } 
           from '../../features/mentor/mentorAPI'
 import { MentorItem1 } from '../../components/Mentor/MentorItem1'
@@ -95,34 +95,17 @@ const onSubmit = (e) => {
       </Card.Body>
     </Card>
 
-    { searchClicked &&
+  { searchClicked &&
+
         <React.Fragment>
           <Card>
-            <Table hover style={{marginTop : 5}}>
-              <thead>
-                <tr style={{textAlign: "center", color: "White", backgroundColor: "teal"}}>    
-                  {/* <th>User Id</th> */}
-                  <th>User Name</th>
-                  <th>Start Date / Time</th>
-                  <th>End Date / Time</th>
-                  <th>Mentor skill</th>
-                  <th>Action</th>
-                  {/* <th>Mentored Hours</th>
-                  <th>Mentor-Rating</th>
-                  <th>AboutMentor</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {mentor.map(item => {
-                  return (
-                    <MentorItem1  key={item.userid} 
-                                  mentorData={item} 
-                                  onDelete={handleDeleteModalOpen}/>
-                        )
-                })}
-              </tbody>
-            </Table>
-          </Card>
+            {mentor.map(item => {
+              return (
+                <MentorItem1 key={item.userid} mentorData={item} onDelete={handleDeleteModalOpen}/>
+                     )
+            })}
+         </Card>
+
          <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
           <Modal.Header closeButton>
             <Modal.Title>Delete Mentor</Modal.Title>
@@ -137,8 +120,9 @@ const onSubmit = (e) => {
                 </Button>
               </Modal.Footer>
          </Modal>
+
        </React.Fragment>
-    }
+      }
   </React.Fragment>
   )
 }
