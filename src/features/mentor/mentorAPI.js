@@ -23,8 +23,22 @@ export const addMentor = async (mentor) => {
       throw new Error('addMentor API request failed!');
     }
   }
+  export const getMentorByUAId = async (userid,availabilityid) => {
+    try {
+      console.log(userid)
+      console.log(availabilityid)
+      const res = await API.get(`/mentor/${userid}/${availabilityid}`)
+      console.log(res)
+    
+      return res.data
+    } catch (error) {
+      console.error(error)
+      throw new Error('View MentorByID Request failed!')
+    }
+  }
   export const getMentorById = async (userid) => {
     try {
+      console.log(userid)
       const res = await API.get(`/mentor/${userid}`)
       console.log(res)
     

@@ -88,7 +88,7 @@ export const ViewAllMentor = () => {
               <th>Skill</th>
               <th>Start Date / Time</th>
               <th>End Date / Time</th>
-              <th colspan="2">Action</th>                       
+              <th>Action</th>                       
             </tr>
           </thead>
           <tbody>
@@ -98,7 +98,6 @@ export const ViewAllMentor = () => {
                 <MentorItem key={mentor.availabilityid}
                             mentorData={mentor}
                             onDelete={handleDeleteModalOpen} 
-                            // onEdit={handleEditModalOpen}
                 />
               )
             })}
@@ -108,7 +107,7 @@ export const ViewAllMentor = () => {
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
           <Button variant="danger" size="md"
-            style={{ width: "20%", marginTop: "10px" }}
+            style={{ width: "22%", marginTop: "10px", marginLeft: "740px" }}
             onClick={handleDeleteAllModalOpen}>
             Delete All
           </Button>

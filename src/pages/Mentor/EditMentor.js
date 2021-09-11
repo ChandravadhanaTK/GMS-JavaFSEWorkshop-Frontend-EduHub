@@ -2,18 +2,20 @@ import { Card, Button, Form } from 'react-bootstrap'
 import { MentorItem } from '../../components/Mentor/MentorItem'
 import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router'
-import { getMentorById, updateMentor } from '../../features/mentor/mentorAPI'
+import { getMentorByUAId, updateMentor } from '../../features/mentor/mentorAPI'
 
 
 export const EditMentor = () => {
-  const { userId } = useParams()
+  const { userId,availabilityId } = useParams()
+  console.log(`userId ${userId}` , `availabilityId ${availabilityId}` );
+  console.log(useParams())
   const history = useHistory()
   const [mentorItem, setUserItem] = useState({userid: '',availabilityid: '',startdatetime: '',enddatetime: '',mentoringskill: '', mentoredhours: '',mentorrating: '',aboutmentor: '',lastupdatedon: '' })
 
   useEffect(async () => {
     try {
       console.log(userId)
-      const editData = await getMentorById(userId)
+      const editData = await getMentorByUAId(userId,availabilityId)
       console.log(editData)
 
       setUserItem(editData[0])

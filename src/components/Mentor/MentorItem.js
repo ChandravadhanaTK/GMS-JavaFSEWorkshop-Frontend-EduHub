@@ -7,7 +7,7 @@ export const MentorItem = (props) => {
   const history = useHistory();
   console.log("props: " + JSON.stringify(props));
 
-  const { mentorData } = props
+  const { mentorData, onDelete } = props
 
   const formatDateTime = (datetime) => {
 
@@ -38,14 +38,16 @@ export const MentorItem = (props) => {
           <td>{formatDateTime(mentorData.startdatetime)}</td>
           <td>{formatDateTime(mentorData.enddatetime)}</td>
           <td>
-            <Button variant="warning" style={{ marginLeft: 10 }} 
-                    onClick={() => history.push(`/mentor/edit/${props.mentorData.userid}`)} >
+          <div >
+            <Button variant="warning" size='sm'
+                    onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
                     Edit
-            </Button>
-            <Button variant="danger" style={{ marginLeft: 20 }}  
-                    onClick={() => props.onDelete(props.mentorData.userid)}>
+            </Button> {' '}
+            <Button variant="danger" size='sm'  
+                    onClick={() => onDelete(mentorData.userid)}>
                     Delete
-            </Button>                        
+            </Button> 
+            </div>                       
           </td>          
         </tr>
   )
