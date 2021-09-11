@@ -38,19 +38,16 @@ export const MentorItem1 = (props) => {
             {/* <td>{props.mentorData.mentoredhours}</td>
                 <td>{props.mentorData.mentorrating}</td>
                 <td>{props.mentorData.aboutmentor}</td> */}
-            {/* <div>             */}
-            <td>
-                <Button variant="warning" size ="sm" style={{ marginLeft: 20 }} 
+            <td className="row">
+                <Button variant="warning" size ="sm" style={{ marginLeft: -10 }} 
                         onClick={() => history
                                 .push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
                     Edit
                 </Button>
-                <Button variant="danger" size="sm" style={{ marginLeft: 10 }} 
+                <Button variant="danger" size="sm" style={{ marginLeft: -10, marginTop: 10 }} 
                         onClick={() => props.onDelete(props.mentorData.userid)}>
-                    
                     Delete
                 </Button>
-            {/* </div> */}
             </td>
         </tr>
     )
