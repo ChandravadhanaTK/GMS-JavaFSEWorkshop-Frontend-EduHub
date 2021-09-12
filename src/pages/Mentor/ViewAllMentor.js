@@ -8,7 +8,8 @@ import { MentorItem } from '../../components/Mentor/MentorItem'
 export const ViewAllMentor = () => {
 
   const [mentors, setMentors] = useState([]);
-  const [toDelete, setToDelete] = useState(0);
+  const [toDeleteId, setToDeleteId] = useState(0);
+  const [toDeleteAId, setToDeleteAId] = useState(0);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
 
@@ -30,9 +31,16 @@ export const ViewAllMentor = () => {
   }
  
 
-  const handleDeleteModalOpen = (mentorId) => {
-    setToDelete(mentorId)
+  // const handleDeleteModalOpen = (mentorId,availabilityid) => {
+    const handleDeleteModalOpen = (userid,availabilityid) => {
+      // setToDeleteId(mentorId)
+      console.log("mentor.availability" + mentors.availabilityid) // tilak
+      console.log("user id" + userid)
+      console.log("availabilityId " + availabilityid)
+    setToDeleteId(userid)
+    setToDeleteAId(availabilityid)
     setShowDeleteModal(true)
+
   }
 
   const handleDeleteModalClose = () => {
@@ -51,10 +59,12 @@ export const ViewAllMentor = () => {
 
   const handleDelete = async () => {
     try {
-      await deleteMentor(toDelete)
+      console.log(toDeleteAId)
+      await deleteMentor(toDeleteId,toDeleteAId)
 
       // clear toDelete
-      setToDelete('')
+      setToDeleteId('')
+      setToDeleteAId('')
 
       // close modal
       setShowDeleteModal(false)
@@ -80,7 +90,7 @@ export const ViewAllMentor = () => {
 
   return (
     <React.Fragment>
-      {/* <Card> */}
+      <Card>
         <Table striped bordered hover>
           <thead>
             <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
@@ -103,7 +113,7 @@ export const ViewAllMentor = () => {
             })}
           </tbody>        
         </Table>
-      {/* </Card> */}
+      </Card>
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
           <Button variant="danger" size="md"

@@ -62,9 +62,11 @@ export const addMentor = async (mentor) => {
     }
   }
 
-export const deleteMentor = async (userId) => {
+export const deleteMentor = async (userid,availabilityid) => {
     try {
-      const res = await API.delete(`/mentor/${userId}`)
+      console.log(availabilityid)
+      console.log(userid)
+      const res = await API.delete(`/mentor/${userid}/${availabilityid}`)
       console.log(res)
     
       return res.data

@@ -11,7 +11,8 @@ export const ViewMentor = () => {
   const [userId, setUserId] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
 
-  const [toDelete, setToDelete] = useState(0);
+  const [toDeleteId, setToDeleteId] = useState(0);
+  const [toDeleteAId, setToDeleteAId] = useState(0);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleKeyChange = (e) => {
@@ -43,11 +44,13 @@ const onSubmit = (e) => {
       setMentor(mentorData)
     } catch (error) {
       // TODO: notify user
+      console.log("Error in getMentoryById ")
     }
   }
 
-  const handleDeleteModalOpen = (mentorId) => {
-    setToDelete(mentorId)
+  const handleDeleteModalOpen = (userId,availabilityid) => {
+    setToDeleteId(userId)
+    setToDeleteAId(availabilityid)
     setShowDeleteModal(true)
   }
 
@@ -57,10 +60,11 @@ const onSubmit = (e) => {
 
   const handleDelete = async () => {
     try {
-      await deleteMentor(toDelete)
+      await deleteMentor(toDeleteId,toDeleteAId)
 
       // clear toDelete
-      setToDelete('')
+      setToDeleteId('')
+      setToDeleteAId('')
 
       // close modal
       setShowDeleteModal(false)
@@ -68,7 +72,7 @@ const onSubmit = (e) => {
       // refresh demo data
       await getMentorData(userId)
     } catch (error) {
-      
+      console.log("Error in handleDelete")
     }
   }
 
@@ -87,7 +91,7 @@ const onSubmit = (e) => {
                 Enter Mentor id :)
               </Form.Text>
             </Form.Group>
-            <Button variant="warning" type="submit">
+            <Button variant="warning" background-color="DodgerBlue" type="submit">
               View
             </Button>
           </Form>
@@ -95,34 +99,34 @@ const onSubmit = (e) => {
       </Card.Body>
     </Card>
 
-    { searchClicked &&
+  { searchClicked && userId!="" &&
+
         <React.Fragment>
-          <Card>
-            <Table hover style={{marginTop : 5}}>
-              <thead>
-                <tr style={{textAlign: "center", color: "White", backgroundColor: "teal"}}>    
-                  {/* <th>User Id</th> */}
-                  <th>User Name</th>
-                  <th>Start Date / Time</th>
-                  <th>End Date / Time</th>
-                  <th>Mentor skill</th>
-                  <th>Action</th>
-                  {/* <th>Mentored Hours</th>
-                  <th>Mentor-Rating</th>
-                  <th>AboutMentor</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {mentor.map(item => {
-                  return (
-                    <MentorItem1  key={item.userid} 
-                                  mentorData={item} 
-                                  onDelete={handleDeleteModalOpen}/>
-                        )
-                })}
-              </tbody>
-            </Table>
-          </Card>
+        <Card>
+            <Table striped bordered hover>
+                    <thead>
+                        <tr style={{textAlign: "Center", color: "White", backgroundColor: "dodgerblue"}}>    
+                            <th>UserId</th>
+                            <th>Mentor Name</th>
+                            <th>Start Date/Time</th>
+                            <th>End Date/Time</th>
+                            <th>Mentor Skill</th>
+                            <th>Mentor Rating</th>
+                            <th>Action </th>
+                            {/* <th>AboutMentor</th>  */}
+                        </tr>
+                    </thead> 
+                    
+                    <tbody>
+                      {mentor.map(item => {
+                        return (
+                          <MentorItem1 key={item.userid} mentorData={item} onDelete={handleDeleteModalOpen}/>
+                              )
+                      })}
+                    </tbody>
+          </Table>
+         </Card>
+
          <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
           <Modal.Header closeButton>
             <Modal.Title>Delete Mentor</Modal.Title>
@@ -137,8 +141,9 @@ const onSubmit = (e) => {
                 </Button>
               </Modal.Footer>
          </Modal>
+
        </React.Fragment>
-    }
+      }
   </React.Fragment>
   )
 }
