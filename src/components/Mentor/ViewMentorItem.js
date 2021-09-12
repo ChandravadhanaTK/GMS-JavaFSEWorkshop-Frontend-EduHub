@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { Button } from 'react-bootstrap'
 
-export const MentorItem1 = (props) => {
+export const ViewMentorItem = (props) => {
 
     const { onDelete, mentorData } = props
 

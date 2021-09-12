@@ -1,9 +1,9 @@
-import { Card, Modal, Button, Table, Alert } from 'react-bootstrap'
+import { Modal, Button, Table, Alert } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
 import {  getAllMentors, 
           deleteMentor, 
           deleteAllMentor } from '../../features/mentor/mentorAPI'
-import { MentorItem } from '../../components/Mentor/MentorItem'
+import { ViewAllMentorItem } from '../../components/Mentor/ViewAllMentorItem'
 
 export const ViewAllMentor = () => {
 
@@ -90,7 +90,6 @@ export const ViewAllMentor = () => {
         ? null 
         : <Alert variant="danger">No Mentor Data Present. Please add mentors.</Alert>
       }      
-      <Card>
         <Table striped bordered hover>
           <thead>
             <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
@@ -105,7 +104,7 @@ export const ViewAllMentor = () => {
             {mentors.map(mentor => {
               console.log(JSON.stringify(mentor));
               return (
-                <MentorItem key={mentor.availabilityid}
+                <ViewAllMentorItem key={mentor.availabilityid}
                             mentorData={mentor}
                             onDelete={handleDeleteModalOpen} 
                 />
@@ -113,11 +112,10 @@ export const ViewAllMentor = () => {
             })}
           </tbody>        
         </Table>
-      </Card>
       {mentors.length > 1 ?
         <div className="d-grid gap-2">
           <Button variant="danger" size="md"
-            style={{ width: "22%", marginTop: "10px", marginLeft: "740px" }}
+            style={{ width: "22%", marginLeft: "740px" }}
             onClick={handleDeleteAllModalOpen}>
             Delete All
           </Button>

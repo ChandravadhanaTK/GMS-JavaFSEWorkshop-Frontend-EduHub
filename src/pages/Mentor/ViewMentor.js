@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import { Alert, Card, Button, Form, Modal, Table } from 'react-bootstrap'
 import { getMentorById, deleteMentor } 
           from '../../features/mentor/mentorAPI'
-import { MentorItem1 } from '../../components/Mentor/MentorItem1'
+import { ViewMentorItem } from '../../components/Mentor/ViewMentorItem'
 
 export const ViewMentor = () => {
 
@@ -96,7 +96,7 @@ const onSubmit = (e) => {
         </Card.Text>
       </Card.Body>
     </Card>
-  { searchClicked && userId!="" &&
+  { searchClicked && userId!=="" &&
         <React.Fragment>
           { mentor.length 
             ?<Table striped bordered hover>
@@ -114,7 +114,7 @@ const onSubmit = (e) => {
               <tbody>
                 {mentor.map(item => {
                   return (
-                    <MentorItem1  key={item.userid} 
+                    <ViewMentorItem  key={item.userid} 
                                   mentorData={item} 
                                   onDelete={handleDeleteModalOpen}/>
                     )

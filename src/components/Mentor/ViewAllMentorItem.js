@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 
-export const MentorItem = (props) => {
+export const ViewAllMentorItem = (props) => {
   
   const history = useHistory();
   console.log("props: " + JSON.stringify(props));
@@ -37,7 +37,7 @@ export const MentorItem = (props) => {
       <td>{formatDateTime(mentorData.startdatetime)}</td>
       <td>{formatDateTime(mentorData.enddatetime)}</td>
       <td>
-        <Button variant="warning" size='sm'
+        <Button variant="warning" size='sm' style={{marginLeft:10}}
                 onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
                 Edit
         </Button>

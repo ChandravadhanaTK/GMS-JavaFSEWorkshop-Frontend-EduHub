@@ -13,9 +13,6 @@ export const AddMentor = () => {
   const [mentorRating, setMentorRating] = useState('');
   const [aboutMentor, setAboutMentor] = useState('');
     
-  const [startDateTimeLocal, setStartDateTimeLocal] = useState('');
-  const [endDateTimeLocal, setEndDateTimeLocal]     = useState('');
-
   const handleInputUserIdChange = (event) => {
     const updatedValue = event.target.value;
     setUserId( updatedValue );
@@ -25,8 +22,6 @@ export const AddMentor = () => {
     const startdatetimelocal = event.target.value;
     console.log(startdatetimelocal);
 
-    setStartDateTimeLocal(startdatetimelocal);
-    console.log(startdatetimelocal.concat(":00"));
     setStartDateTime(startdatetimelocal.concat(":00"));
   }
 
@@ -34,7 +29,6 @@ export const AddMentor = () => {
     const enddatetimelocal = event.target.value;
     console.log(enddatetimelocal);
 
-    setEndDateTimeLocal(enddatetimelocal);
     setEndDateTime(enddatetimelocal.concat(":00")); 
   }
 
