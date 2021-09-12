@@ -1,10 +1,10 @@
 import { useHistory } from "react-router-dom";
-import { Card, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 export const MentorItem1 = (props) => {
 
     const { onDelete, mentorData } = props
-    // const { MentorDataItem, mentorData } = props
+
     const formatDateTime = (datetime) => {
 
         let date = new Date(datetime); 
@@ -30,31 +30,23 @@ export const MentorItem1 = (props) => {
     const history = useHistory();
 
     return (
-       
-                <tr>
-                    <td>{props.mentorData.userid}</td>
-                    <td>{props.mentorData.username}</td>
-                    <td>{formatDateTime(props.mentorData.startdatetime)}</td>
-                    <td>{formatDateTime(props.mentorData.enddatetime)}</td>
-                    <td>{props.mentorData.mentoringskill}</td>
-                    <td>{props.mentorData.mentorrating}</td>
-                    {/* <td>{props.mentorData.aboutmentor}</td> */}
-
-                    <td>
-                        <div>            
-                            <Button variant="warning" size="sm" style={{"background-color":"Orange", marginRight: 20 }} 
-                                    onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
-                                        Edit
-                            </Button>
-
-                            {/* <Button variant="danger" onClick={() => props.onDelete(props.mentorData.userid, props.mentorData.availabilityid)}> */}
-                            <Button variant="danger" size="sm"  
-                                    onClick={() => onDelete(mentorData.userid, mentorData.availabilityid)}>            
-                                        Delete
-                            </Button>
-                        </div>
-                    </td>
-
-                </tr> 
+        <tr>
+            <td>{mentorData.userid}</td>
+            <td>{mentorData.username}</td>
+            <td>{formatDateTime(mentorData.startdatetime)}</td>
+            <td>{formatDateTime(mentorData.enddatetime)}</td>
+            <td>{mentorData.mentoringskill}</td>
+            <td>{mentorData.mentorrating}</td>
+            <td className="row">
+                <Button variant="warning" size="sm" 
+                        onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
+                            Edit
+                </Button>
+                <Button variant="danger" size="sm"  style={{marginTop: 5}}
+                        onClick={() => onDelete(mentorData.userid, mentorData.availabilityid)}>            
+                            Delete
+                </Button>
+            </td>
+        </tr>
     )
 }

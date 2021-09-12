@@ -1,8 +1,8 @@
-import { Card, Modal, Button, Table } from 'react-bootstrap'
+import { Card, Modal, Button, Table, Alert } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
 import {  getAllMentors, 
           deleteMentor, 
-          deleteAllMentor, updateMentor } from '../../features/mentor/mentorAPI'
+          deleteAllMentor } from '../../features/mentor/mentorAPI'
 import { MentorItem } from '../../components/Mentor/MentorItem'
 
 export const ViewAllMentor = () => {
@@ -14,7 +14,7 @@ export const ViewAllMentor = () => {
   const [showDeleteAllModal, setShowDeleteAllModal] = useState(false);
 
   useEffect(() => {
-      // fectch data from api and update the state
+      // fetch data from api and update the state
       console.log("Within useEffect()");
       getMentorData()
   },  [])
@@ -30,13 +30,10 @@ export const ViewAllMentor = () => {
     }
   }
  
-
-  // const handleDeleteModalOpen = (mentorId,availabilityid) => {
-    const handleDeleteModalOpen = (userid,availabilityid) => {
-      // setToDeleteId(mentorId)
-      console.log("mentor.availability" + mentors.availabilityid) // tilak
-      console.log("user id" + userid)
-      console.log("availabilityId " + availabilityid)
+  const handleDeleteModalOpen = (userid,availabilityid) => {
+    console.log("mentor.availability" + mentors.availabilityid)
+    console.log("user id" + userid)
+    console.log("availabilityId " + availabilityid)
     setToDeleteId(userid)
     setToDeleteAId(availabilityid)
     setShowDeleteModal(true)
@@ -48,7 +45,6 @@ export const ViewAllMentor = () => {
   }
 
   const handleDeleteAllModalOpen = () => {
-    // setToDelete(mentorId)
     console.log("HANDLEDELETEALLMODALOPEN");
     setShowDeleteAllModal(true)
   }
@@ -69,7 +65,7 @@ export const ViewAllMentor = () => {
       // close modal
       setShowDeleteModal(false)
 
-      // refresh demo data
+      // refresh mentor data
       await getMentorData()
     } catch (error) {
       
@@ -90,6 +86,10 @@ export const ViewAllMentor = () => {
 
   return (
     <React.Fragment>
+      { mentors.length  
+        ? null 
+        : <Alert variant="danger">No Mentor Data Present. Please add mentors.</Alert>
+      }      
       <Card>
         <Table striped bordered hover>
           <thead>

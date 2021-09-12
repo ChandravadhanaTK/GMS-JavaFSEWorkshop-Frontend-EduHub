@@ -28,7 +28,6 @@ export const AddMentor = () => {
     setStartDateTimeLocal(startdatetimelocal);
     console.log(startdatetimelocal.concat(":00"));
     setStartDateTime(startdatetimelocal.concat(":00"));
-    //console.log(startdatetime);
   }
 
   const handleEndDateTimeChange = (event) => {
@@ -120,7 +119,6 @@ export const AddMentor = () => {
             <Form.Label>About Mentor</Form.Label>
             <Form.Control value={aboutMentor} type="text" placeholder="Enter details of mentor" onChange={handleAboutMentorChange} />
           </Form.Group>
-
           <Button variant="primary" type="submit">
             Submit
           </Button>

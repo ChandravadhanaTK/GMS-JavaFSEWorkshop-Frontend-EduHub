@@ -1,12 +1,8 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
-//import { Route, Switch } from 'react-router'
 
 import { MentorRoutes } from '../../routes/mentorRoutes'
-// import { ViewAllMentor } from './ViewAllMentor'
-// import { AddMentor } from './AddMentor'
-// import { EditMentor } from './EditMentor'
 
 export const Mentor = () => {
   let { path } = useRouteMatch()

@@ -1,7 +1,6 @@
 import React, { useState} from 'react'
-// import { useParams, useHistory } from 'react-router'
-import { Card, Button, Form, Modal, Table } from 'react-bootstrap'
-import { getMentorById, deleteMentor,  updateMentor } 
+import { Alert, Card, Button, Form, Modal, Table } from 'react-bootstrap'
+import { getMentorById, deleteMentor } 
           from '../../features/mentor/mentorAPI'
 import { MentorItem1 } from '../../components/Mentor/MentorItem1'
 
@@ -81,8 +80,7 @@ const onSubmit = (e) => {
     <Card>
       <Card.Body>
         <Card.Title>View Mentor</Card.Title>
-        <Card.Text>
-          
+        <Card.Text>          
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Mentor Id</Form.Label>
@@ -98,34 +96,33 @@ const onSubmit = (e) => {
         </Card.Text>
       </Card.Body>
     </Card>
-
   { searchClicked && userId!="" &&
-
         <React.Fragment>
-        <Card>
-            <Table striped bordered hover>
-                    <thead>
-                        <tr style={{textAlign: "Center", color: "White", backgroundColor: "dodgerblue"}}>    
-                            <th>UserId</th>
-                            <th>Mentor Name</th>
-                            <th>Start Date/Time</th>
-                            <th>End Date/Time</th>
-                            <th>Mentor Skill</th>
-                            <th>Mentor Rating</th>
-                            <th>Action </th>
-                            {/* <th>AboutMentor</th>  */}
-                        </tr>
-                    </thead> 
-                    
-                    <tbody>
-                      {mentor.map(item => {
-                        return (
-                          <MentorItem1 key={item.userid} mentorData={item} onDelete={handleDeleteModalOpen}/>
-                              )
-                      })}
-                    </tbody>
-          </Table>
-         </Card>
+          { mentor.length 
+            ?<Table striped bordered hover>
+              <thead>
+                <tr style={{textAlign: "Center", color: "White", backgroundColor: "dodgerblue"}}>    
+                  <th>UserId</th>
+                  <th>Mentor Name</th>
+                  <th>Start Date / Time</th>
+                  <th>End Date / Time</th>
+                  <th>Mentor Skill</th>
+                  <th>Mentor Rating</th>
+                  <th>Action </th>
+                </tr>
+              </thead>                     
+              <tbody>
+                {mentor.map(item => {
+                  return (
+                    <MentorItem1  key={item.userid} 
+                                  mentorData={item} 
+                                  onDelete={handleDeleteModalOpen}/>
+                    )
+                })}
+              </tbody>
+            </Table>
+            : <Alert variant="danger">Mentor {userId} data Present. Please add this mentor's details in Eduhub.</Alert>
+          }
 
          <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
           <Modal.Header closeButton>
