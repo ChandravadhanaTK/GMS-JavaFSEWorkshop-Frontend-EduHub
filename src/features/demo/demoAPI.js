@@ -2,10 +2,10 @@ import { API } from '../../api'
 
 export const getAllDemo = async () => {
   try {
-    const res = await API.get(`/demo`)
-    console.log(res)
+      const res = await API.get(`/demo`);
+      console.log(res);
   
-    return res.data
+      return res.data;
   } catch (error) {
     console.error(error)
     throw new Error('Request failed!')
