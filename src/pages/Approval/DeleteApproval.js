@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
-import { deleteApprovalByIdAPI } from '../../features/Approver/ApproverAPI'
-import {ApprovalId} from '../../components/Approver/ApprovalId'
-import ApprovalDetails, {} from '../../components/Approver/ApprovalDetails'
+import { deleteApprovalByIdAPI } from '../../features/Approval/ApprovalAPI'
+import {ApprovalId} from '../../components/Approval/ApprovalId'
+import ApprovalDetails, {} from '../../components/Approval/ApprovalDetails'
 
-export const DeleteApprover = () => {
+export const DeleteApproval = () => {
   const history = useHistory()
 
   let resp = {};

@@ -1,12 +1,11 @@
 import { API } from '../../api'
 
-export const getAllApprover = async () => {
+export const getAllApprovalsAPI = async () => {
   try {
-    console.log('getAllApprover()')
+    console.log('getAllApproval()')
     //const res = await API.get(`/Approver`)
     const res = await API.get('/approvals')
     console.log('response = ', res);
-
     return res.data
   } catch (error) {
     console.error(error)

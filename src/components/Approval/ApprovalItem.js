@@ -1,12 +1,12 @@
 import { useHistory } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
 import { useState } from 'react';
-import './ApproverItem.css';
+import './ApprovalItem.css';
 
-export const ApproverItem = (props) => {
+export const ApprovalItem = (props) => {
   
   // const { ApproverDataItem } = props;
-  const [ApproverData, setApproverData] = useState(props.ApproverData);
+  const [ApprovalData, setApprovalData] = useState(props.ApprovalData);
  
   //const history = useHistory();
   // console.log("props: " + JSON.stringify(props));
@@ -30,13 +30,13 @@ export const ApproverItem = (props) => {
   //               <tbody>
                   // <tr> no records to display </tr>
                   <tr >
-                    <td>{ApproverData.approvalId}</td> 
-                    <td>{ApproverData.requestId}</td>
-                    <td>{ApproverData.rmId}</td>
-                    <td>{ApproverData.approvalStatus}</td>
-                    <td>{ApproverData.approvalStatusMessage}</td>
-                    <td>{ApproverData.createdOn}</td>
-                    <td>{ApproverData.lastUpdatedOn}</td>
+                    <td>{ApprovalData.approvalId}</td> 
+                    <td>{ApprovalData.requestId}</td>
+                    <td>{ApprovalData.rmId}</td>
+                    <td>{ApprovalData.approvalStatus}</td>
+                    <td>{ApprovalData.approvalStatusMessage}</td>
+                    <td>{ApprovalData.createdOn}</td>
+                    <td>{ApprovalData.lastUpdatedOn}</td>
                   </tr> 
         //         </tbody>
         //     </table>

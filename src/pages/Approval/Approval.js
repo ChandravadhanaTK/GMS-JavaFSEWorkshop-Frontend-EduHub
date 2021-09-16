@@ -1,17 +1,16 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { Container, Tab, Row, Col, Nav } from 'react-bootstrap'
-import { ApproverRoutes } from '../../routes/approverRoutes'
+import { ApprovalRoutes } from '../../routes/approvalRoutes'
 
-
-export const Approver = () => {
+export const Approval = () => {  
   let { path } = useRouteMatch()
   console.log(useRouteMatch());
 
   console.log(path)
   return (
     <Container>
-      <h1>Approver</h1>
+      <h1>Approval</h1>
       <Tab.Container id="left-tabs-example" defaultActiveKey={`${path}/all`} activeKey={`${path}/all`}>
         <Row>
           <Col sm={3}>
@@ -34,10 +33,13 @@ export const Approver = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/deleteall`}>Delete All Approvals</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link as={Link} to={`${path}/futureEnhancements`}>Future Enhancements</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={6}>
-            <ApproverRoutes path={path} />
+            <ApprovalRoutes path={path} />
           </Col>
         </Row>
       </Tab.Container>

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
-import { getApprovalByIdAPI } from '../../features/Approver/ApproverAPI'
-import {ApprovalId} from '../../components/Approver/ApprovalId'
-import ApprovalDetails from '../../components/Approver/ApprovalDetails'
+import { getApprovalByIdAPI } from '../../features/Approval/ApprovalAPI'
+import {ApprovalId} from '../../components/Approval/ApprovalId'
+import ApprovalDetails from '../../components/Approval/ApprovalDetails'
 
 export const ViewOneApproval = () => {
   const history = useHistory()

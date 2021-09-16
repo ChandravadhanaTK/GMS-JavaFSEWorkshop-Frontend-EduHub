@@ -1,6 +1,6 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-import { deleteAllApprovalsAPI } from '../../features/Approver/ApproverAPI'
+import { deleteAllApprovalsAPI } from '../../features/Approval/ApprovalAPI'
 
 export const DeleteAllApprovals = () => {
     const history = useHistory();
@@ -9,13 +9,13 @@ export const DeleteAllApprovals = () => {
         try{
           const resp = await deleteAllApprovalsAPI();
           console.log('Approvals deleted from table = ', resp);
-          history.push('/approver/all')
+          history.push('/approval/all')
         } catch(error){
           console.log(error);
         }
     }
     const onCancelClickedHandler = () =>{
-        history.push('/approver/all');
+        history.push('/approval/all');
     }
 
  return(

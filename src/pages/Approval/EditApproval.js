@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { useParams, useHistory } from 'react-router'
 import { Card, Button, Form } from 'react-bootstrap'
 
-import { getApprovalByIdAPI, updateApprovalAPI } from '../../features/Approver/ApproverAPI'
-import {ApprovalId} from '../../components/Approver/ApprovalId'
-import ApprovalDetails from '../../components/Approver/ApprovalDetails'
-import {ApprovalEditOptions} from '../../components/Approver/ApprovalEditOptions'
+import { getApprovalByIdAPI, updateApprovalAPI } from '../../features/Approval/ApprovalAPI'
+import {ApprovalId} from '../../components/Approval/ApprovalId'
+import ApprovalDetails from '../../components/Approval/ApprovalDetails'
+import {ApprovalEditOptions} from '../../components/Approval/ApprovalEditOptions'
 
 export const EditApproval = () => {
   const history = useHistory()
@@ -69,7 +69,7 @@ export const EditApproval = () => {
       let response = await updateApprovalAPI(updatedApproval)
       console.log('approval update response = ', response);
       displayApprovalIdEntryPanelHandler();
-      history.push('/approver/all')
+      history.push('/approval/all')
      }catch(error){
       console.log(error)
     }

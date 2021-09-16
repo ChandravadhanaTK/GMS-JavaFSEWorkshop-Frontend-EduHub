@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Modal, Button } from 'react-bootstrap'
-import { getAllApprover, deleteApprovalByIdAPI } from '../../features/Approver/ApproverAPI'
-import { ApproverItem } from '../../components/Approver/ApproverItem'
-import '../../components/Approver/ApproverItem.css';
+import { getAllApprovalsAPI, deleteApprovalByIdAPI } from '../../features/Approval/ApprovalAPI'
+import { ApprovalItem } from '../../components/Approval/ApprovalItem'
+import '../../components/Approval/ApprovalItem.css';
 
 const localApprovalData = [
   {approvalId:"1",
@@ -32,42 +32,40 @@ const localApprovalData = [
   }
 ]
 
-export const ViewAllApprover = () => {
-  const [Approver, setApprover] = useState(localApprovalData);
+export const ViewAllApproval = () => {
+  const [Approval, setApproval] = useState(localApprovalData);
   const [showModal, setShowModal] = useState(false)
   const [toDelete, setToDelete] = useState('')
 
   //setApprover(localApprovalData);
-  console.log('Approver Data = ', Approver);
+  console.log('Approval Data = ', Approval);
   
   useEffect(() => {
     // fectch data from api and update the state
     console.log('Fetching approval details from localhost application api.')
-    getApproverData()
+    getApprovalData()
   }, [])
 
-  const getApproverData = async () => {
+  const getApprovalData = async () => {
     try {
-      console.log('in getApproverData()');
-      const ApproverData = await getAllApprover();
-      console.log('Approval data = ', ApproverData);
+      console.log('in getApprovalData()');
+      const ApprovalData = await getAllApprovalsAPI();
+      console.log('Approval data = ', ApprovalData);
       // const ApproverData = [
       //   {approvalid:"451",requesterid:"781",rmId:"14530",approvalstatus:"Approved",asmessage:"Approved"},
       //   {approvalid:"452",requesterid:"782",rmId:"14531",approvalstatus:"Rejected",asmessage:"Wrong Request"},
       //   {approvalid:"453",requesterid:"783",rmId:"14532",approvalstatus:"Pending",asmessage:"WIP"},
       // ]
       //const ApproverData = {...localApprovalData};
-
       //console.log("approval data"+ ApproverData.name)
-      setApprover(ApproverData);
+      setApproval(ApprovalData);
     } catch (error) {
-      // TODO: notify user
       console.log(error);
     }
   }
 
-  const handleModalOpen = (ApproverId) => {
-    setToDelete(ApproverId)
+  const handleModalOpen = (ApprovalId) => {
+    setToDelete(ApprovalId)
     setShowModal(true)
   }
 
@@ -96,8 +94,8 @@ export const ViewAllApprover = () => {
           <thead>
           <tr>
             <th>Approval Id</th>
-            <th>Requester Id</th>
-            <th>RM Id</th>
+            <th>Requester Employee Id </th>
+            <th>Reporting Manager Id</th>
             <th>Approval Status</th>
             <th>Requester Status Message</th>
             <th>Creation Date</th>
@@ -105,14 +103,14 @@ export const ViewAllApprover = () => {
           </tr>
           </thead>
           <tbody>
-            {Approver.map(item => {return (<ApproverItem key={item.approvalId} ApproverData={item} onDelete={handleModalOpen} />)})}
+            {Approval.map(item => {return (<ApprovalItem key={item.approvalId} ApprovalData={item} onDelete={handleModalOpen} />)})}
           </tbody>
         </table>
 
       </Card>
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete Approver</Modal.Title>
+          <Modal.Title>Delete Approval</Modal.Title>
         </Modal.Header>
         <Modal.Body>Are you sure?</Modal.Body>
         <Modal.Footer>

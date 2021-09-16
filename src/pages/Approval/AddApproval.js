@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Card, Button, Form } from 'react-bootstrap'
-import { addApprovalAPI } from '../../features/Approver/ApproverAPI'
+import { addApprovalAPI } from '../../features/Approval/ApprovalAPI'
 
-//import { addDemo } from '../../features/demo/demoSlice'
-
-export const AddApprover = () => {
+export const AddApproval = () => {
   const history = useHistory()
   const [form, setForm] = useState({
     name: ''
@@ -29,30 +27,30 @@ export const AddApprover = () => {
     console.log('approvalStatusMessage = ', approvalStatusMessage);
   }
 
-  const handleInputNameChange = (event) => {
-    const updatedValue = event.target.value
-    setForm({ name: updatedValue })
-  }
+  // const handleInputNameChange = (event) => {
+  //   const updatedValue = event.target.value
+  //   setForm({ name: updatedValue })
+  // }
 
-  const handleInputSkillChange = (event) => {
-    const updatedValue = event.target.value
-    setForm({ approveringSkill: updatedValue })
-  }
+  // const handleInputSkillChange = (event) => {
+  //   const updatedValue = event.target.value
+  //   setForm({ approveringSkill: updatedValue })
+  // }
 
-  const handleInputHoursChange = (event) => {
-    const updatedValue = event.target.value
-    setForm({ approveredHours: updatedValue })
-  }
+  // const handleInputHoursChange = (event) => {
+  //   const updatedValue = event.target.value
+  //   setForm({ approveredHours: updatedValue })
+  // }
 
-  const handleInputRatingChange = (event) => {
-    const updatedValue = event.target.value
-    setForm({ approveredRating: updatedValue })
-  }
+  // const handleInputRatingChange = (event) => {
+  //   const updatedValue = event.target.value
+  //   setForm({ approveredRating: updatedValue })
+  // }
 
-  const handleAboutapproverChange = (event) => {
-    const updatedValue = event.target.value
-    setForm({ aboutapprover: updatedValue })
-  }
+  // const handleAboutapproverChange = (event) => {
+  //   const updatedValue = event.target.value
+  //   setForm({ aboutapprover: updatedValue })
+  // }
 
 
   const handleSubmit = async (event) => {
@@ -72,7 +70,7 @@ export const AddApprover = () => {
 
     try{
       await addApprovalAPI(newApproval)
-      history.push('/approver/all')
+      history.push('/approval/all')
      }catch(error){
       console.log(error)
     }
