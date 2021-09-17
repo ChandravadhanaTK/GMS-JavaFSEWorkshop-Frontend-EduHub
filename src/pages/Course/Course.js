@@ -23,6 +23,9 @@ export const Course = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add Course</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link as={Link} to={`${path}/futuredev`}>Future Developments</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>

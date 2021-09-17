@@ -45,8 +45,11 @@ export const ViewCourse = () => {
   }
 }, [])
 
+const handleOK = (e) => {
+  history.push('/course/all')
+ }
 
-    
+
   return (
     <Card>
       <Card.Body>
@@ -78,9 +81,10 @@ export const ViewCourse = () => {
             <Form.Label>Last Updated On</Form.Label>
             <Form.Control type="text" value = {courseItem.lastUpdatedOn} readOnly />
           </Form.Group>
-
-         </Form.Group>
-          
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleOK}>
+            OK
+        </Button>
         
         </Form>
         </Card.Text>
