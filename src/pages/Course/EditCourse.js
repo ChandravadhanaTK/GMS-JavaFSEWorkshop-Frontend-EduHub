@@ -91,6 +91,10 @@ const handleInputlastUpdatedOnChange = (e) => {
         history.push('/course/all')
        
       }
+
+      const handleCancel = (e) => {
+        history.push('/course/all')
+       }
     
     
   return (
@@ -124,11 +128,13 @@ const handleInputlastUpdatedOnChange = (e) => {
             <Form.Label>Last Updated On</Form.Label>
             <Form.Control type="text" value = {courseItem.lastUpdatedOn} onChange={handleInputlastUpdatedOnChange} readOnly />
           </Form.Group>
-
           </Form.Group>
           
-          <Button variant="primary" type="submit">
+          <Button variant="primary" style={{ marginRight: 15 }  } type="submit">
             Submit
+          </Button>
+          <Button variant="secondary"  onClick={handleCancel}>
+            Cancel
           </Button>
 
         </Form>

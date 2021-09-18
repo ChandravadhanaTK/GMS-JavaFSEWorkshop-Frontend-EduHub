@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Row, Modal, Button } from 'react-bootstrap'
+import { Card, Row, Modal, Button, Table } from 'react-bootstrap'
 import { useRouteMatch } from 'react-router-dom'
 import { getAllCourse, deleteCourse, deleteAllCourses } from '../../features/course/courseAPI'
 import { CourseItem } from '../../components/Course/CourseItem'
@@ -36,13 +36,6 @@ export const ViewAllCourse = () => {
      
     }
   }
-
-  
-
- 
-    
-
- 
 
   const handleModalOpen = (courseId) => {
     console.log("InsideModalOpen");
@@ -103,7 +96,7 @@ export const ViewAllCourse = () => {
       console.log("Failed to Delete and View 2nd Time");
       console.error(error)
     }
-  }
+  } 
 
   return (
           
@@ -120,33 +113,32 @@ export const ViewAllCourse = () => {
       <div>
       <button type="button">Search </button> 
       </div> */}
-       
-           <div>
-            <table className="table">
-                <thead>
-                  <tr sm={1}>
-                    <th>Course Id</th>
-                    <th>Course Name</th>
-                    <th>Course Description</th>
-                    {/* <th>Skill Reqd</th>
-                    <th>Created On</th>
-                    <th>Last Updated On</th>
-                    <th>Created On</th>
-                    <th>Last Updated On</th>   */}
-                  </tr>
-                </thead>
-            </table>
-      </div>
 
+
+<Table striped bordered hover>
+      {/* <table> */}
+          <thead>
+            <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
+            <th>Course Id</th>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th></th>
                
-      <Card>
-        {course.map(item => {
+          </tr>
+          </thead>
+         
+          <tbody>
+           
+            {course.map(item => {
           return (
               <CourseItem key={item.courseid} courseData={item} onDelete={handleModalOpen} />
             )
         })}
-      </Card>
-     
+
+         </tbody>        
+  </Table>
+  {/* </table> */}
+
       <div>
       <button type="button" name="delall" value="delall" onClick={handleModalOpenAll}>Delete All </button> 
       </div>

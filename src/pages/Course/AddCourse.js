@@ -65,6 +65,9 @@ export const AddCourse = () => {
     history.push('/course/all')
   }
 
+  const handleCancel = (e) => {
+    history.push('/course/all')
+   }
 
   return (
     <Card>
@@ -89,9 +92,13 @@ export const AddCourse = () => {
             <Form.Control value={skillreqd} type="text" placeholder="Enter Skill Required" onChange={handleInputSkillReqdChange} />
         </Form.Group>
                           
-        <Button variant="primary" type="submit">
+
+        <Button variant="primary" style={{ marginRight: 15 }  } type="submit">
             Submit
-        </Button>
+          </Button>
+          <Button variant="secondary"  onClick={handleCancel}>
+            Cancel
+          </Button>
 
         </Form>
       </Card.Body>
