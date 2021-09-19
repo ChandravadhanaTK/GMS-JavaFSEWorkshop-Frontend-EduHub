@@ -5,11 +5,13 @@ import { useState } from 'react';
 
 import { Card, Button, Form, Container, Col, Row, Modal } from 'react-bootstrap'
 import { addLearner } from '../../features/learner/learnerAPI';
+import { getUserById } from '../../features/user/userAPI'
 
 export const AddLearner = () => {
   const history = useHistory()
   const [requestid, setRequestId] = useState(); 
   const [userid, setUserId] = useState(); 
+  const [username, setUserName] = useState(); 
   const [userrole, setUserRole] = useState(); 
   const [courseid, setCourseId] = useState(); 
   const [rmId, setRmId] = useState(); 
@@ -24,6 +26,10 @@ export const AddLearner = () => {
   const [addStatus, setaddStatus] = useState(false); 
   const [addClicked, setaddClicked] = useState(false); 
   const [showModal, setShowModal] = useState(false);
+  const [validUser, setValidUser] = useState(false);
+
+  const [showInvalidUserModal, setShowInvalidUserModal] = useState(false);
+  
 
    
   const handleModalOpen = () => {
@@ -32,6 +38,11 @@ export const AddLearner = () => {
 
   const handleModalClose = () => {
     setShowModal(false)
+  }
+
+  const handleInvalidUserModalClose = () => {
+
+    setShowInvalidUserModal(false)
   }
   const handelRequestIdChange = (event) => {
     console.log(event.target.value)
@@ -44,6 +55,8 @@ export const AddLearner = () => {
     console.log(event.target.value)
     const inputUserId = event.target.value
     setUserId(inputUserId)
+    setValidUser(false)
+    setUserName('')
     setaddClicked(false)
   }
 
@@ -68,9 +81,27 @@ export const AddLearner = () => {
     setaddClicked(false)
   }
 
+  const handleValidateUser = async () => {
+    console.log("Validate user clicked")
+    console.log(userid )
+      try {
+        console.log(userid)
+        const userData = await getUserById(userid)
+        console.log(userData)
+        setUserName(userData.firstName + ' ' + userData.secondName)
+        setValidUser(true)
+      } catch (error) {
+        console.error(error)
+        setShowInvalidUserModal(true)
+
+  }
+}
+
+  
   const addNewLearner = async (event) => {
     setShowModal(false)
     event.preventDefault()
+
     const learnerdata = {  
                       
       requestId          : requestid,
@@ -158,8 +189,19 @@ export const AddLearner = () => {
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3" controlId="userid">
                     <Form.Label column sm="6">User Id</Form.Label>
-                    <Col sm="5">
+                    <Col sm="3">
                       <Form.Control type="text" placeholder="Enter User Id"  value={userid} onChange={handelUserIdChange} />
+                    </Col>
+                    <Col sm="3">
+                        <Button variant="primary" onClick={handleValidateUser}>Validate</Button>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="username">
+                    <Form.Label column sm="6">User Name</Form.Label>
+                    <Col sm="5">
+                      
+                      <Form.Control type="text" value={username} readOnly/>
+                      
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-3" controlId="userrole">
@@ -241,7 +283,7 @@ export const AddLearner = () => {
             </Form.Group>
             <div className="container">
             {/* <Button variant="primary" onClick={addNewLearner}> */}
-            <Button variant="primary" onClick={handleModalOpen}>
+            <Button variant="primary" disabled={!validUser} onClick={handleModalOpen}>
               Submit
             </Button>
             <Modal show={showModal} onHide={handleModalClose}>
@@ -254,6 +296,16 @@ export const AddLearner = () => {
             Cancel
           </Button>
           <Button variant="primary" onClick={addNewLearner}>Add</Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={showInvalidUserModal} onHide={handleInvalidUserModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>User not found in EduHub</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleInvalidUserModalClose}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
             </div>
