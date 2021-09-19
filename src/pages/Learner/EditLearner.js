@@ -3,7 +3,7 @@ import './Learner.css' ;
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react';
 
-import { Card, Button, Form, Container, Col, Row } from 'react-bootstrap'
+import { Card, Button, Form, Container, Col, Row, Modal } from 'react-bootstrap'
 import { updateLearner } from '../../features/learner/learnerAPI';
 
 export const EditLearner = (props) => {
@@ -27,44 +27,15 @@ export const EditLearner = (props) => {
   const [learnerscore, setLearnerScore] = useState(history.location.state.learnerScore); 
   const [updateStatus, setUpdateStatus] = useState(false); 
   const [updateClicked, setUpdateClicked] = useState(false); 
-  const [courseIdText, setCourseIdText] = useState(); 
+  const [showModal, setShowModal] = useState(false)
 
-  
-  // const courseIdvalue = () => {
-  //   if (courseid === 1)
-  //     { setCourseIdText("1. Core Java")}
-  //   else
-  //   if (courseid === 2)
-  //   { setCourseIdText("2. Advance Java")}
-  //   else
-  //   if (courseid === 3)
-  //     { setCourseIdText("3. React")}  
-    
-  // }
+  const handleModalOpen = () => {
+    setShowModal(true)
+  }
 
-
-
-  // option value="1">1. Core Java</option>
-  //                       <option value="2">2. Advance Java</option>
-  //                       <option value="3">3. React</option>
-
-  //  const handelRmIdChange = (event) => {
-  //   console.log(event.target.value)
-  //   const updatedvalue = event.target.value
-  //   setRmId(updatedvalue)
-  // }
-
-  // const handelRoleChange = (event) => {
-  //   console.log(event.target.value)
-  //   const updatedvalue = event.target.value
-  //   setUserRole(updatedvalue)
-  // }
-
-  // const handelCourseIdChange = (event) => {
-  //   console.log(event.target.value)
-  //   const updatedvalue = event.target.value
-  //   setCourseId(updatedvalue)
-  // }
+  const handleModalClose = () => {
+  setShowModal(false)
+  }
 
   const handelApprovalIdChange = (event) => {
     console.log(event.target.value)
@@ -115,6 +86,8 @@ export const EditLearner = (props) => {
   }
 
   const editLearner = async (event) => {
+
+    setShowModal(false)
 
     // event.preventDefault()
     const learnerdata = {  
@@ -284,8 +257,9 @@ export const EditLearner = (props) => {
                 </Form.Group>
               </Container>
             </Form.Group>
-            <div className ="d-grid">
-            <Button variant="primary" onClick={editLearner}>
+            <div className="container">
+            {/* <Button variant="primary" onClick={editLearner}> */}
+            <Button variant="primary" onClick={handleModalOpen}>
               Update
             </Button>
             </div>
@@ -293,6 +267,18 @@ export const EditLearner = (props) => {
                 <div className="alert alert-warning">Lerner record Updated Successfully</div> 
             } */}
           </Form>
+          <Modal show={showModal} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Learner</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Click confirm to save changes and cancel to go back</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={editLearner}>Confirm</Button>
+        </Modal.Footer>
+      </Modal>
                 
               
               </Card.Text>

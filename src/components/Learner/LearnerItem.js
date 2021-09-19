@@ -15,71 +15,27 @@ export const LearnerItem = (props) => {
   // console.log("learnerData: " +JSON.stringify(learnerData));
 
   return (
-    <Card>
-      <div className="container" >
-            <table className="table">
-                <thead>
-                  <tr>
-                    <th>Request Id</th>
-                    <th>User Id</th>
-                    <th>Role</th>
-                    <th>Course Id</th>
-                    <th>Approval Status</th>
-                    <th>Assignment Id</th>
-                    <th>Assignment Status</th>
-                    <th>Score</th>
-                    {/* <th>Approval Status</th> */}
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{props.learnerData.requestId}</td>
-                    <td>{props.learnerData.userId}</td>
-                    <td>{props.learnerData.role}</td>
-                    <td>{props.learnerData.courseId}</td>
-                    <td>{props.learnerData.approvalStatus}</td>
-                    <td>{props.learnerData.assignmentId}</td>
-                    <td>{props.learnerData.assignmentStatus}</td>
-                    <td>{props.learnerData.learnerScore}</td>
-                    {/* <td>{props.learnerData.approvalStatus}</td> */}
-                    <div>            
-                  {/* <Button variant="warning" style={{ marginRight: 10 }} onClick={  () => history.push({pathname: `/learner/edit/${props.learnerData.requestId}`, state : props.learnerData}) }>
-                 
-                    Edit
-                  </Button>
-                  <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>
-                    Delete
-                  </Button> */}
-                </div>
-                  </tr>
-                  <div>            
-                
-                </div>
-                </tbody>
-            </table>
-             <div>            
+    <tr>
+                    
+                    <td xs={6}>{props.learnerData.requestId}</td>
+                    <td xs={6}>{props.learnerData.userId}</td>
+                    <td xs={6}>{props.learnerData.role}</td>
+                    <td xs={6}>{props.learnerData.courseId}</td>
+                    <td xs={6}>{props.learnerData.approvalStatus}</td>
+                    <td xs={6}>{props.learnerData.assignmentId}</td>
+                    {/* <td xs={6}>{props.learnerData.assignmentStatus}</td> */}
+                    <td xs={6}>{props.learnerData.learnerScore}</td>
+                  <td>
                   <Button variant="warning" style={{ marginRight: 10 }} onClick={  () => history.push({pathname: `/learner/edit/${props.learnerData.requestId}`, state : props.learnerData}) }>
                  
-                    Edit
-                  </Button>
-                  <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>
+                 View/Edit
+               </Button>
+               <Button variant="danger" onClick={() => props.onDelete(props.learnerData.requestId)}>
                     Delete
                   </Button>
-                </div>
-          
-      </div>
-    </Card>
-    
-    
-
-
-
-
-
-    
-                            // <td>{props.learnerData.requestId}</td>
-                            // <td>{props.learnerData.userId}</td>
-                            // <td>{props.learnerData.role}</td>
+                    
+                  </td> 
+                </tr>  
        
   )
 }

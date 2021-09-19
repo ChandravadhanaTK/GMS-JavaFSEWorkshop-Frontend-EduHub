@@ -3,7 +3,7 @@ import './Learner.css' ;
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react';
 
-import { Card, Button, Form, Container, Col, Row } from 'react-bootstrap'
+import { Card, Button, Form, Container, Col, Row, Modal } from 'react-bootstrap'
 import { addLearner } from '../../features/learner/learnerAPI';
 
 export const AddLearner = () => {
@@ -23,9 +23,16 @@ export const AddLearner = () => {
   const [learnerscore, setLearnerScore] = useState('0'); 
   const [addStatus, setaddStatus] = useState(false); 
   const [addClicked, setaddClicked] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
 
    
+  const handleModalOpen = () => {
+      setShowModal(true)
+  }
 
+  const handleModalClose = () => {
+    setShowModal(false)
+  }
   const handelRequestIdChange = (event) => {
     console.log(event.target.value)
     const inputRequestId = event.target.value
@@ -62,7 +69,7 @@ export const AddLearner = () => {
   }
 
   const addNewLearner = async (event) => {
-
+    setShowModal(false)
     event.preventDefault()
     const learnerdata = {  
                       
@@ -232,14 +239,25 @@ export const AddLearner = () => {
                 </Form.Group>
               </Container>
             </Form.Group>
-            <div className ="d-grid">
-            <Button variant="primary" onClick={addNewLearner}>
+            <div className="container">
+            {/* <Button variant="primary" onClick={addNewLearner}> */}
+            <Button variant="primary" onClick={handleModalOpen}>
               Submit
             </Button>
+            <Modal show={showModal} onHide={handleModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Learner</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure to Add new Learner in EduHub?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={addNewLearner}>Add</Button>
+        </Modal.Footer>
+      </Modal>
             </div>
-          </Form>
-                
-              
+          </Form>              
               </Card.Text>
             </Card.Body>
           </Card>
