@@ -7,7 +7,7 @@ import { ViewMentorItem } from '../../components/Mentor/ViewMentorItem'
 export const ViewMentor = () => {
 
   const [mentor, setMentor] = useState([]);
-  const [userId, setUserId] = useState([]);
+  const [userId, setUserId] = useState();
   const [searchClicked, setSearchClicked] = useState(false);
 
   const [toDeleteId, setToDeleteId] = useState(0);
@@ -104,10 +104,11 @@ const onSubmit = (e) => {
                 <tr style={{textAlign: "Center", color: "White", backgroundColor: "dodgerblue"}}>    
                   <th>UserId</th>
                   <th>Mentor Name</th>
-                  <th>Start Date / Time</th>
-                  <th>End Date / Time</th>
+                  <th>Available From</th>
+                  <th>Available To</th>
                   <th>Mentor Skill</th>
-                  <th>Mentor Rating</th>
+                  <th>Rating</th>
+                  {/* <th>Mentor Rating</th> */}
                   <th>Action </th>
                 </tr>
               </thead>                     
@@ -121,7 +122,8 @@ const onSubmit = (e) => {
                 })}
               </tbody>
             </Table>
-            : <Alert variant="danger">Mentor {userId} data Present. Please add this mentor's details in Eduhub.</Alert>
+            : <Alert variant="danger">Enter valid Mentor Id (or) please add this mentor's details in Eduhub.</Alert>
+            // : <Alert variant="danger">Mentor {userId} data Present. Please add this mentor's details in Eduhub.</Alert>
           }
 
          <Modal show={showDeleteModal} onHide={handleDeleteModalClose}>
@@ -133,6 +135,7 @@ const onSubmit = (e) => {
                 <Button variant="secondary" onClick={handleDeleteModalClose}>
                   Cancel
                 </Button>
+                {/* <Button variant="danger" onClick={handleDelete}> */}
                 <Button variant="danger" onClick={handleDelete}>
                   Delete
                 </Button>

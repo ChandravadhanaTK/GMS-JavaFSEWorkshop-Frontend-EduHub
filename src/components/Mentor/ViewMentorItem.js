@@ -38,11 +38,12 @@ export const ViewMentorItem = (props) => {
             <td>{mentorData.mentoringskill}</td>
             <td>{mentorData.mentorrating}</td>
             <td className="row">
-                <Button variant="warning" size="sm" 
+                {/* <Button variant="warning" size="sm" */}
+                <Button variant="warning" size="sm" style={{marginLeft: 10, width: "60%"}} 
                         onClick={() => history.push(`/mentor/edit/${mentorData.userid}/${mentorData.availabilityid}`)} >
                             Edit
                 </Button>
-                <Button variant="danger" size="sm"  style={{marginTop: 5}}
+                <Button variant="danger" size="sm"  style={{marginLeft: 10, marginTop: 10, width: "60%"}}
                         onClick={() => onDelete(mentorData.userid, mentorData.availabilityid)}>            
                             Delete
                 </Button>

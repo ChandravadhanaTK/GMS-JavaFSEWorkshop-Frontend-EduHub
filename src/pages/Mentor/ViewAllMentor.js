@@ -95,8 +95,8 @@ export const ViewAllMentor = () => {
             <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
               <th>Mentor Name</th>
               <th>Skill</th>
-              <th>Start Date / Time</th>
-              <th>End Date / Time</th>
+              <th>Available From</th>
+              <th>Available To</th>
               <th>Action</th>                       
             </tr>
           </thead>
