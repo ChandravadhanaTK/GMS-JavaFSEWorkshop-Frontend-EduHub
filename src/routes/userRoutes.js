@@ -1,6 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 
-import { ViewAllUser, AddUser, EditUser, ViewUser } from '../pages/User'
+import { ViewAllUser, AddUser, EditUser, ViewUser} from '../pages/User'
+import { UserFutureDevelopments} from '../pages/User/UserFutureDevelopments'
 
 export const UserRoutes = (props) => {
   return (
@@ -8,6 +9,7 @@ export const UserRoutes = (props) => {
       <Route path={`${props.path}/all`} component={ViewAllUser} />
       <Route path={`${props.path}/add`} component={AddUser} />
       <Route path={`${props.path}/edit/:id`} component={EditUser} />
+      <Route path={`${props.path}/newfeatures`} component={UserFutureDevelopments } />
       <Route path={`${props.path}/view/:id`} component={ViewUser} />
     </Switch>
   )

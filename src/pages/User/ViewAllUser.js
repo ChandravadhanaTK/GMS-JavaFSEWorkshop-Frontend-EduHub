@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Modal, Button } from 'react-bootstrap'
+import { Card, Modal, Button, Table, Alert } from 'react-bootstrap'
 
 import { getAllUser, deleteUser, deleteAllUsers } from '../../features/user/userAPI'
 
@@ -12,7 +12,7 @@ export const ViewAllUser = () => {
   const [toDelete, setToDelete] = useState('')
 
   useEffect(() => {
-    // fectch data from api and update the state
+    // fetch data from api and update the state
     getUserData()
   }, [])
 
@@ -75,29 +75,45 @@ export const ViewAllUser = () => {
 
   return (
     <React.Fragment>
-      <Card>
-        {user.map(item => {
-          return (
+      <h1>User details</h1>
+      { user.length
+        ? null 
+        :  <Alert variant="danger">No Users to View. Please add Users.</Alert>
+      }  
+      <Table striped bordered hover>
+        <thead>
+          <tr style={{textAlign: "center", color: "White", backgroundColor: "grey"}}> 
+             <th>User Id</th>
+             <th>Username</th>
+             <th>Role</th>
+             <th>Experience</th>
+             <th>Action</th>
+          </tr>
+        </thead>  
+        <tbody>
+         {user.map(item => {
+           return (
             <UserItem key={item.id} userData={item} onDelete={handleDelModalOpen} />
           )
-        })}
-      </Card>
-      <Card>
+          })}
+        </tbody>
+      </Table>
+      <Card>        
         {user.length > 1 ?
         <div className="d-grid gap-2">
-          <Button variant="primary" size="lg"
+          <Button variant="primary" size="lg" 
             backgroundcolor="black"
             color="blue"
-            textalign="center"
-            style={{width: "100%", margin: "center" }}
-            padding="5px 10px 5px 10px"
+            font-size="10px"
+            style={{width: "auto", margin: "auto", textAlign: "center" }}
+            padding="2px 1px" 
             onClick={handleDelAllModalOpen}>
             Delete All
           </Button>
         </div>
         : <div className="d-grid gap-2">
-          <Button variant="secondary" disabled size="lg"
-            style={{ width: "100%", marginTop: "10px" }}
+            <Button variant="secondary" disabled size="lg"
+            style={{width: "auto", margin: "auto", textAlign: "center" }}
                 opacity="0.7"
                 cursor="default"
                 >

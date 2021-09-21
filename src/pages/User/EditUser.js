@@ -157,6 +157,16 @@ export const EditUser = () => {
       console.error(error)
     }
   }
+
+  const handleCancel = (e) => {
+    e.preventDefault()
+      try {
+              history.push('/user/all')
+    } catch (error) {
+      console.error(error)
+          }
+  }
+
   return (
     <Card>
       <Card.Body>
@@ -227,6 +237,9 @@ export const EditUser = () => {
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
+          </Button>
+          <Button variant="secondary"  onClick={handleCancel}>
+            Cancel
           </Button>
         </Form>
       </Card.Body>

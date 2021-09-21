@@ -44,7 +44,7 @@ export const ViewUser = () => {
               history.push('/user/all')
     } catch (error) {
       console.error(error)
-    }
+          }
   }
   return (
     <Card>
