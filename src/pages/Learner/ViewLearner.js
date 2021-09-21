@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Row, Col, Card, Modal, Button } from 'react-bootstrap'
+import { Row, Col, Card, Modal, Button , Table} from 'react-bootstrap'
 
 import { getAllLearner, deleteLearner, getLearnerById, getLearnerByUser, deleteAllLearner, deleteLearnerUser } from '../../features/learner/learnerAPI'
 
 import { LearnerItem } from '../../components/Learner/LearnerItem'
-import { EditLearner } from './EditLearner'
 
 export const ViewLearner = () => {
   const [learner, setLearner] = useState([])
@@ -183,9 +182,7 @@ export const ViewLearner = () => {
     try {
       await deleteLearnerUser(userinput)
 
-        // {getLearnerDataByUser(userinput)}
-           
-      
+        // {getLearnerDataByUser(userinput)}  
      
     } catch (error) {
       
@@ -198,29 +195,29 @@ export const ViewLearner = () => {
           <Card.Title>View Learner</Card.Title>
           <Card.Text>
             <form>
-              <input type="radio" as={Row} value="RequestId" id="request"
+              <input type="radio" as={Row} style={{ marginLeft: 5 }} value="RequestId" id="request"
                 onChange={handleOptionChange} name="search" />
               <label>View by Request Id</label>
-              {'    '}
-              <input type="radio" as={Col} value="UserId" id="user"
+              {/* {'    '} */}
+              <input type="radio" as={Col} style={{ marginLeft: 10 }} value="UserId" id="user"
                 onChange={handleOptionChange} name="search"/>
               <label>View by User Id</label>
-              {'    '}
-              <input type="radio" as={Col} value="All" id="all"
+              {/* {'    '} */}
+              <input type="radio" as={Col} style={{ marginLeft: 10 }} value="All" id="all"
                 onChange={handleOptionChange} name="search" defaultChecked/>
               <label>View All</label>
             </form>
           
           {search !== 'All' && 
-                <form className="input">
+                <form className="container">
                   <input type="text" onChange={handleKeyChange} value={userinput} name="userinput" />
                 </form>
            }
           
           </Card.Text>
-        <div>
-            <button type="button" onClick={onSubmit}>Search</button> 
-            <button type="button" onClick={onReset}>Clear</button>
+        <div className="container">
+            <Button variant="primary" style={{ marginRight: 10 }} onClick={onSubmit}>Search</Button> 
+            <Button variant="primary" onClick={onReset}>Clear</Button>
             {invalidInput && 
               <div className="alert alert-warning">Please provide search key</div>
             }
@@ -232,8 +229,8 @@ export const ViewLearner = () => {
     { searchClicked &&
 
     <React.Fragment>
-      <Card>
-      {/* <table className="table">
+      {/* <Card>
+      <table className="table">
                 <thead>
                   <tr>
                     <th>Request Id</th>
@@ -247,7 +244,7 @@ export const ViewLearner = () => {
                  
                     </tr>
                 </thead>
-      </table> */}
+      </table>
       </Card>
       <Card>
         {learner.map(item => {
@@ -255,9 +252,35 @@ export const ViewLearner = () => {
             <LearnerItem key={item.id} learnerData={item} onDelete={handleModalOpen} />
           )
         })}
+      </Card> */}
+      <Table striped bordered hover>
+      {/* <table> */}
+          <thead>
+            <tr style={{textAlign: "center", color: "White", backgroundColor: "dodgerblue"}}>
+            <th>Request Id</th>
+                    <th>User Id</th>
+                    <th>Role</th>
+                    <th>Course Id</th>
+                    <th>Approval Status</th>
+                    <th>Assignment Id</th>
+                    {/* <th>Assignment Status</th> */}
+                    <th>Score</th>
+            <th></th>
+               
+          </tr>
+          </thead>
+         
+          <tbody>
+           
+            {learner.map(item => {
+          return (
+            <LearnerItem key={item.id} learnerData={item} onDelete={handleModalOpen} />
+            )
+        })}
 
-        
-      </Card>
+         </tbody>        
+  </Table>
+      
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Learner</Modal.Title>
@@ -276,7 +299,7 @@ export const ViewLearner = () => {
       }
 
       { learner.length === 0 && 
-        <div className="alert alert-warning">No Record found</div> 
+        <div className="alert alert-warning"  >No Record found</div> 
       }
       {/* { search === 'All' && 
       <div>
