@@ -22,6 +22,9 @@ export const User = () => {
               <Nav.Item>
                 <Nav.Link as={Link} to={`${path}/add`}>Add User</Nav.Link>
               </Nav.Item>
+              <Nav.Item>
+                <Nav.Link as={Link} to={`${path}/newfeatures`}>Future Developments</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
